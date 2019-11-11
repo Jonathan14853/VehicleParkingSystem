@@ -4,7 +4,7 @@ include('dbconnection.php');
 if(isset($_POST['login']))
 {
 	$password=$_POST['password'];
-$ret= mysql_query("SELECT * FROM workers WHERE username='".$_POST['user_name']."' and password='$password'");
+$ret= mysql_query("SELECT * FROM worker WHERE username='".$_POST['user_name']."' and password='$password'");
 $num=mysql_fetch_array($ret);
 if($num>0)
 {

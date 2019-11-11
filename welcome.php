@@ -32,7 +32,7 @@ if (strlen($_SESSION['id']==0)) {
                         <a href="#"><?php echo $_SESSION['login'];?></a>
                     </li>
                     <li>
-                        <a href="#">customer</a>
+                        <a href="customer.php">customer</a>
                     </li>
                     <li>
                         <a href="#">worker</a>
@@ -45,7 +45,7 @@ if (strlen($_SESSION['id']==0)) {
             </div>
         </div>
     </nav>
-    <div class="container">
+    <!--<div class="container">
         <header class="jumbotron hero-spacer">
             <h1>A Warm Welcome!</h1>
             <p></p>
@@ -64,7 +64,8 @@ if (strlen($_SESSION['id']==0)) {
         <hr>
 
 
-    </div>
+    </div>-->
+
     <script src="js/jquery.js"></script>
     <script src="js/bootstrap.min.js"></script>
 </body>

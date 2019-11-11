@@ -9,7 +9,7 @@ if(isset($_POST['signup']))
 	$first_name=$_POST['first_name'];
 	$last_name=$_POST['last_name'];
 	$enc_password=$_POST['password'];
-	$msg=mysqli_query($con,"insert into customers(username,first_name,last_name,password) values('$user_name','$first_name','$last_name','$enc_password')");
+	$msg=mysqli_query($con,"insert into customer(username,first_name,last_name,password) values('$user_name','$first_name','$last_name','$enc_password')");
 if($msg)
 {
 	echo "<script>alert('Register successfully');</script>";
@@ -22,7 +22,7 @@ if(isset($_POST['login']))
 $password=$_POST['password'];
 $dec_password=$password;
 $user=$_POST['user'];
-$ret= mysqli_query($con,"SELECT * FROM customers WHERE username='$user' and password='$dec_password'");
+$ret= mysqli_query($con,"SELECT * FROM customer WHERE username='$user' and password='$dec_password'");
 $num=mysqli_fetch_array($ret);
 if($num>0)
 {
