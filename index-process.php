@@ -9,7 +9,8 @@ if(isset($_POST['signup']))
 	$first_name=$_POST['first_name'];
 	$last_name=$_POST['last_name'];
 	$enc_password=$_POST['password'];
-	$msg=mysqli_query($con,"insert into customer(username,first_name,last_name,password) values('$user_name','$first_name','$last_name','$enc_password')");
+	$hash = password_hash($enc_password, PASSWORD_DEFAULT);
+	$msg=mysqli_query($con,"insert into customer(username,first_name,last_name,password) values('$user_name','$first_name','$last_name','$hash')");
 if($msg)
 {
 	echo "<script>alert('Register successfully');</script>";
