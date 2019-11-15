@@ -8,7 +8,7 @@ if (strlen($_SESSION['ccmsaid']==0)) {
    if(isset($_POST['submit']))
   {
     
-    $cid=$_GET['upid'];
+    #$cid=$_GET['upid'];
       $remark=$_POST['remark'];
       $status=$_POST['status'];
       $outtime=$_POST['outtime'];
@@ -78,8 +78,8 @@ echo "<script>window.location.href ='manage-olduser.php'</script>";
                     <div class="page-title">
                         <ol class="breadcrumb text-right">
                             <li><a href="dashboard.php">Dashboard</a></li>
-                            <li><a href="view-user-detail.php">View Users</a></li>
-                            <li class="active">Users</li>
+                            <li><a href="view-user-detail.php">View Slots</a></li>
+                            <li class="active">Slots</li>
                         </ol>
                     </div>
                 </div>
@@ -99,7 +99,7 @@ echo "<script>window.location.href ='manage-olduser.php'</script>";
 
                     <div class="col-lg-12">
                         <div class="card">
-                            <div class="card-header"><strong>View</strong><small> Users</small></div>
+                            <div class="card-header"><strong>View</strong><small> Slots</small></div>
                            
                                 <p style="font-size:16px; color:red" align="center"> <?php if($msg){
     echo $msg;
@@ -107,42 +107,27 @@ echo "<script>window.location.href ='manage-olduser.php'</script>";
                             <div class="card-body card-block">
  <?php
  $cid=$_GET['upid'];
-$ret=mysqli_query($con,"select * from tblusers where ID='$cid'");
+$ret=mysqli_query($con,"select * from parking_slot where ID='?'");
 $cnt=1;
 while ($row=mysqli_fetch_array($ret)) {
 
 ?>                       <table border="1" class="table table-bordered mg-b-0">
    
    <tr>
-                                <th>Entry ID</th>
-                                   <td><?php  echo $row['EntryID'];?></td>
+                                <th>StreetID</th>
+                                   <td><?php  echo $row[StreetID'];?></td>
                                    </tr>                             
 <tr>
-                                <th>Full Name</th>
-                                   <td><?php  echo $row['UserName'];?></td>
+                                <th>SlotName</th>
+                                   <td><?php  echo $row['SlotName'];?></td>
                                    </tr>
                                  
                                 <tr>
-                                <th>User Address</th>
-                                   <td><?php  echo $row['UserAddress'];?></td>
+                                <th>Status</th>
+                                   <td><?php  echo $row['Status'];?></td>
                                    </tr>
-                                   <tr>
-                                    <th>Mobile Number</th>
-                                      <td><?php  echo $row['MobileNumber'];?></td>
-                                  </tr>
-                                      <tr>  
-                                       <th>Email</th>
-                                        <td><?php  echo $row['Email'];?></td>
-                                    </tr>
-                                    <tr>
-                               <th>Computer Name</th>
-                                <td><?php  echo $row['ComputerName'];?></td>
-                            </tr>
-                       <tr>
-                       <th>ID Proof</th>
-                         <td><?php  echo $row['IDProof'];?></td>
-
-                         </tr>                          
+                                   
+                  
            
                      <tr>
        <th>In Time</th>
