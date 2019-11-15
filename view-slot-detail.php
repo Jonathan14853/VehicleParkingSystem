@@ -1,8 +1,8 @@
 <?php
 session_start();
 error_reporting(0);
-include('includes/dbconnection.php');
-if (strlen($_SESSION['ccmsaid']==0)) {
+include('dbconnection.php');
+if (strlen($_SESSION['id']==0)) {
   header('location:logout.php');
   } else{
    if(isset($_POST['submit']))
@@ -15,7 +15,7 @@ if (strlen($_SESSION['ccmsaid']==0)) {
       $totalhrs=$_POST['totalhrs'];
       $fees=$_POST['fees'];
     
-   $query=mysqli_query($con, "update  tblusers set Remark='$remark',Status='$status',Fees='$fees' where ID='$cid'");
+   $query=mysqli_query($con, "update  parking_session set Remark='$remark',Status='$status',Fees='$fees' where ID='$cid'");
     if ($query) {
 echo '<script>alert("Details updated")</script>';
 echo "<script>window.location.href ='manage-olduser.php'</script>";
