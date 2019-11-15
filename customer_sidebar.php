@@ -1,10 +1,11 @@
 <aside id="left-panel" class="left-panel">
         <nav class="navbar navbar-expand-sm navbar-default">
-/<?php
-/*
-$customer_id=$_SESSION['login'];
-$ret=mysqli_query($con,"select * username from customer where username='?'");
+<?php
+
+$user=$_SESSION['login'];
+$ret=mysqli_query($con,"select  username from customer where username='$user'");
 $row=mysqli_fetch_array($ret);
+/*
 $user_name=$row['user_name'];
 */
 ?>
@@ -12,7 +13,7 @@ $user_name=$row['user_name'];
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-menu" aria-controls="main-menu" aria-expanded="false" aria-label="Toggle navigation">
                     <i class="fa fa-bars"></i>
                 </button> 
-                <a class="navbar-brand" href="welcome.php">CUSTOMER | <?php/* echo $user_name; */?></a>
+                <a class="navbar-brand" href="welcome.php">CUSTOMER | <?php echo $user; ?></a>
                 
             </div>
 

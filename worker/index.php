@@ -1,5 +1,5 @@
 <?php session_start();
-require_once('dbconnection.php');
+require_once('../dbconnection.php');
 
 //Code for Registration 
 if(isset($_POST['signup']))
@@ -8,7 +8,7 @@ if(isset($_POST['signup']))
 	$first_name=$_POST['first_name'];
 	$last_name=$_POST['last_name'];
 	$enc_password=$_POST['password'];
-	$msg=mysqli_query($con,"insert into workers(username,first_name,last_name,password) values('$user_name','$first_name','$last_name','$enc_password')");
+	$msg=mysqli_query($con,"insert into worker(username,first_name,last_name,password) values('$user_name','$first_name','$last_name','$enc_password')");
 if($msg)
 {
 	echo "<script>alert('Register successfully');</script>";
@@ -21,7 +21,7 @@ if(isset($_POST['login']))
 $password=$_POST['password'];
 $dec_password=$password;
 $user=$_POST['user'];
-$ret= mysqli_query($con,"SELECT * FROM workers WHERE username='$user' and password='$dec_password'");
+$ret= mysqli_query($con,"SELECT * FROM worker WHERE username='$user' and password='$dec_password'");
 $num=mysqli_fetch_array($ret);
 if($num>0)
 {
@@ -73,14 +73,14 @@ echo "<script>alert('Usename not registered with us');</script>";
 <html>
 <head>
 <title>System</title>
-<link href="css/style.css" rel='stylesheet' type='text/css' />
+<link href="../css/style.css" rel='stylesheet' type='text/css' />
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="keywords" content="Elegent Tab Forms,Login Forms,Sign up Forms,Registration Forms,News latter Forms,Elements"./>
 <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
 </script>
-<script src="js/jquery.min.js"></script>
-<script src="js/easyResponsiveTabs.js" type="text/javascript"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/easyResponsiveTabs.js" type="text/javascript"></script>
 				<script type="text/javascript">
 					$(document).ready(function () {
 						$('#horizontalTab').easyResponsiveTabs({

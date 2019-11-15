@@ -27,7 +27,7 @@ include 'index-process.php';
 <body>
 <div class="main">
 		<h1>Customer Registration and Login</h1>
-		<h1 style="text-align: center; color: #FFFF00">Workers Click <a href="worker_index.php">Here</a> To Register</h1>
+		<h1 style="text-align: center; color: #FFFF00">Workers Click <a href="worker/index.php">Here</a> To Register</h1>
 		<br/>
 	 <div class="sap_tabs">	
 			<div id="horizontalTab" style="display: block; width: 100%; margin: 0px;">

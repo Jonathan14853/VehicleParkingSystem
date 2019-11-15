@@ -31,7 +31,7 @@
 
                             <!--<a class="nav-link" href="change-password.php"><i class="fa fa-cog"></i>Change Password</a>-->
 
-                            <a class="nav-link" href="logout.php"><i class="fa fa-power-off"></i> Logout</a>
+                            <a class="nav-link" href="../logout.php"><i class="fa fa-power-off"></i> Logout</a>
                         </div>
                     </div>
 
