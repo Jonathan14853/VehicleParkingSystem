@@ -29,11 +29,12 @@ $user_name=$row['user_name'];
  <li class="menu-item-has-children dropdown">
                         <a href="add-slots.php" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-user"></i>Parking Slots</a>
                         <ul class="sub-menu children dropdown-menu">
+                            <li><i class="fa fa-user"></i><a href="manage-oldslots.php">View Old Slots</a>
+                            </li>
                             <!--<li><i class="fa fa-user"></i><a href="add-slots.php">Add Slots</a></li>
                             <li><i class="fa fa-user"></i><a href="manage-newusers.php">Manage New Slots</a>
                             </li>-->
-                            <li><i class="fa fa-user"></i><a href="manage-oldslots.php">View Old Slots</a>
-                            </li>
+                            
                           
                         </ul>
                     </li>

@@ -8,7 +8,9 @@ if(isset($_POST['signup']))
 	$first_name=$_POST['first_name'];
 	$last_name=$_POST['last_name'];
 	$enc_password=$_POST['password'];
-	$msg=mysqli_query($con,"insert into worker(username,first_name,last_name,password) values('$user_name','$first_name','$last_name','$enc_password')");
+	//$hash = password_hash($enc_password,PASSWORD_DEFAULT);
+	$hash = md5($enc_password);
+	$msg=mysqli_query($con,"insert into worker(username,first_name,last_name,password) values('$user_name','$first_name','$last_name','$hash')");
 if($msg)
 {
 	echo "<script>alert('Register successfully');</script>";
@@ -20,8 +22,10 @@ if(isset($_POST['login']))
 {
 $password=$_POST['password'];
 $dec_password=$password;
+//$hash = password_hash($dec_password,PASSWORD_DEFAULT);
+$hash = md5($dec_password);
 $user=$_POST['user'];
-$ret= mysqli_query($con,"SELECT * FROM worker WHERE username='$user' and password='$dec_password'");
+$ret= mysqli_query($con,"SELECT * FROM worker WHERE username='$user' and password='$hash'");
 $num=mysqli_fetch_array($ret);
 if($num>0)
 {
