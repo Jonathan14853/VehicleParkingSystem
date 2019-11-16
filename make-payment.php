@@ -1,25 +1,18 @@
 <?php
-session_start();
-error_reporting(0);
-include('dbconnection.php');
-if (strlen($_SESSION['id']==0)) {
-  header('location:logout.php');
-  } else{
+	session_start();
 
+	include 'dbconnection.php';
 
-
-  ?>
-<!doctype html>
-<html class="no-js" lang="en">
+	$user = $_SESSION['login'];
+	$ret=mysqli_query($con,"select  username from customer where username='$user'");
+	$row=mysqli_fetch_array($ret);
+?>
+<!DOCTYPE html>
+<html>
 <head>
-   
-    <title>Reports</title>
-   
-
-    <link rel="apple-touch-icon" href="apple-icon.png">
-   
-
-    <link rel="stylesheet" href="vendors/bootstrap/dist/css/bootstrap.min.css">
+	<title>Customer Payment</title>
+	
+	<link rel="stylesheet" href="vendors/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="vendors/font-awesome/css/font-awesome.min.css">
     <link rel="stylesheet" href="vendors/themify-icons/css/themify-icons.css">
     <link rel="stylesheet" href="vendors/flag-icon-css/css/flag-icon.min.css">
@@ -29,24 +22,21 @@ if (strlen($_SESSION['id']==0)) {
 
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
 
-
-
 </head>
-
 <body>
-    <!-- Left Panel -->
+	<?php
+	include_once('customer_sidebar.php');
+	?>
 
-    <?php include_once('includes/sidebar.php');?>
-
-    <div id="right-panel" class="right-panel">
+	<div id="right-panel" class="right-panel">
 
         <!-- Header-->
-        <?php include_once('includes/header.php');?>
+        <?php include_once('header.php');?>
         <div class="breadcrumbs">
             <div class="col-sm-4">
                 <div class="page-header float-left">
                     <div class="page-title">
-                        <h1>View Slots</h1>
+                        <h1>Make Payment</h1>
                     </div>
                 </div>
             </div>
@@ -54,9 +44,9 @@ if (strlen($_SESSION['id']==0)) {
                 <div class="page-header float-right">
                     <div class="page-title">
                         <ol class="breadcrumb text-right">
-                            <li><a href="dashboard.php">Dashboard</a></li>
-                            <li><a href="bwdates-report-ds.php">Between Dates Reports</a></li>
-                            <li class="active">Slots</li>
+                            <li><a href="make-payment.php">Dashboard</a></li>
+                            <li><a href="make-payment.php">Make Payment</a></li>
+                            <li class="active">Payment</li>
                         </ol>
                     </div>
                 </div>
@@ -69,31 +59,22 @@ if (strlen($_SESSION['id']==0)) {
                     <div class="col-lg-12">
                         <div class="card">
                             <div class="card-header">
-                                <strong class="card-title">View Slots</strong>
+                                <strong class="card-title">New Users</strong>
                             </div>
                             <div class="card-body">
-<h4 class="m-t-0 header-title">Between Dates Reports</h4>
-                                    <?php
-$fdate=$_POST['fromdate'];
-$tdate=$_POST['todate'];
-
-?>
-<h5 align="center" style="color:blue">Report from <?php echo $fdate?> to <?php echo $tdate?></h5>
-
                                 <table class="table">
                                     <thead>
                                         <tr>
                                             <tr>
-                  <th>StreetID</th>
-            
-                  <th>SlotName</th>
-                      <th>Status</th>    
-                   <th>Action</th>
+                  <th>ReferenceCode</th>
+                  <th>TransactionNumber</th> 
+                  <th>Amount</th>
+                 <th>Action</th>
                 </tr>
                                         </tr>
                                         </thead>
                                     <?php
-$ret=mysqli_query($con,"select * from parking_slot");
+$ret=mysqli_query($con,"select * from parking_session");
 $cnt=1;
 while ($row=mysqli_fetch_array($ret)) {
 
@@ -101,10 +82,10 @@ while ($row=mysqli_fetch_array($ret)) {
               
                 <tr>
                   <td><?php echo $cnt;?></td>
-            
-                  <td><?php  echo $row['StreetID'];?></td>
-                  <td><?php  echo $row['SlotName'];?></td>
-                  <td><a href="view-slot-detail.php?upid=<?php echo $row['ID'];?>">View Details</a></td>
+             <td><?php  echo $row['ReferenceCode'];?></td>
+                  <td><?php  echo $row['TransactionNumber'];?></td>
+                 
+                  <td ><a href="view-payment-detail.php?upid=<?php echo $row['ID'];?>">Update</a>
                 </tr>
                 <?php 
 $cnt=$cnt+1;
@@ -131,9 +112,5 @@ $cnt=$cnt+1;
     <script src="vendors/popper.js/dist/umd/popper.min.js"></script>
     <script src="vendors/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="assets/js/main.js"></script>
-
-
 </body>
-
 </html>
-<?php }  ?>
