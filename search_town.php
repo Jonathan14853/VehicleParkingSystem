@@ -42,7 +42,7 @@
             <div class="col-sm-4">
                 <div class="page-header float-left">
                     <div class="page-title">
-                        <h1>Search Parking Slot</h1>
+                        <h1>Search Parking Town</h1>
                     </div>
                 </div>
             </div>
@@ -50,9 +50,9 @@
                 <div class="page-header float-right">
                     <div class="page-title">
                         <ol class="breadcrumb text-right">
-                            <li><a href="search_slot.php">Dashboard</a></li>
-                            <li><a href="search_slot.php">Search parking Slots</a></li>
-                            <li class="active">Slots</li>
+                            <li><a href="search_town.php">Dashboard</a></li>
+                            <li><a href="search_town.php">Search Towns</a></li>
+                            <li class="active">Towns</li>
                         </ol>
                     </div>
                 </div>
@@ -65,7 +65,7 @@
                     <div class="col-lg-12">
                         <div class="card">
                             <div class="card-header">
-                                <strong class="card-title">Search Slots</strong>
+                                <strong class="card-title">Search Towns</strong>
                             </div>
 
 <form name="search" method="post" style="padding-top: 20px" >
@@ -75,7 +75,7 @@
                                    
                                    
                                        <div class="form-group row">
-                                                        <label class="col-4 col-form-label" for="example-email" style="padding-left: 50px"><strong>Search by Street Id</strong></label>
+                                                        <label class="col-4 col-form-label" for="example-email" style="padding-left: 50px"><strong>Search Town</strong></label>
                                                         <div class="col-6">
                                                             <input id="searchdata" type="text" name="searchdata" required="true" class="form-control">
                                                         </div>
@@ -106,16 +106,14 @@ $sdata=$_POST['searchdata'];
                                     <thead>
                                         <tr>
                                             <tr>
-                  <th>S.NO</th>
-            
-                  <th>Street ID</th>
-                <th>Slot Name</th>    
+                <th>TownName</th>
+                <th>created_by</th>    
                    <th>Action</th>
                 </tr>
                                         </tr>
                                         </thead>
                                     <?php
-$ret=mysqli_query($con,"select * from parking_slot where street_id like '%$sdata%' || slot_name like  '%$sdata%' || STATUS like  '%$sdata%'");
+$ret=mysqli_query($con,"select * from town where town_name like '%$sdata%' || created_by like  '%$sdata%' ");
 $num=mysqli_num_rows($ret);
 if($num>0){
 $cnt=1;
@@ -125,10 +123,9 @@ while ($row=mysqli_fetch_array($ret)) {
                 <tr>
                   <td><?php echo $cnt;?></td>
             
-                  <td><?php  echo $row['StreetID'];?></td>
-                  <td><?php  echo $row['SlotName'];?></td>
-                  <td><?php  echo $row['Status'];?></td>
-                  <td><a href="view-slot-detail.php?upid=<?php echo $row['StreetID'];?>">View Details</a></td>
+                  <td><?php  echo $row['TownName'];?></td>
+                  <td><?php  echo $row['created_by'];?></td>
+                  <td><a href="view-town-detail.php?upid=<?php echo $row['ID'];?>">View Details</a></td>
                 </tr>
                  <?php 
 $cnt=$cnt+1;

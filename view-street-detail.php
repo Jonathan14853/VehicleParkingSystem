@@ -9,12 +9,13 @@ if (strlen($_SESSION['id']==0)) {
   {
     
     #$cid=$_GET['upid'];
-      $street_id=$_POST['street_id'];
-      $slot_name=$_POST['slot_name'];
+      $remark=$_POST['remark'];
       $status=$_POST['status'];
+      $outtime=$_POST['outtime'];
+      $totalhrs=$_POST['totalhrs'];
       $fees=$_POST['fees'];
     
-   $query=mysqli_query($con, "update  parking_session set Remark='$street_id',Status='$status',Fees='$fees' where ID='$cid'");
+   $query=mysqli_query($con, "update  parking_session set Remark='$remark',Status='$status',Fees='$fees' where ID='$cid'");
     if ($query) {
 echo '<script>alert("Details updated")</script>';
 echo "<script>window.location.href ='manage-olduser.php'</script>";
@@ -57,12 +58,12 @@ echo "<script>window.location.href ='manage-olduser.php'</script>";
 <body>
     <!-- Left Panel -->
 
-    <?php include_once('customer_sidebar.php');?>
+    <?php include_once('includes/sidebar.php');?>
 
     <div id="right-panel" class="right-panel">
 
         <!-- Header-->
-        <?php include_once('header.php');?>
+        <?php include_once('includes/header.php');?>
 
         <div class="breadcrumbs">
             <div class="col-sm-4">
@@ -76,8 +77,8 @@ echo "<script>window.location.href ='manage-olduser.php'</script>";
                 <div class="page-header float-right">
                     <div class="page-title">
                         <ol class="breadcrumb text-right">
-                            <li><a href="view-slot-detail.php">Dashboard</a></li>
-                            <li><a href="view-slot-detail.php">View Slots</a></li>
+                            <li><a href="dashboard.php">Dashboard</a></li>
+                            <li><a href="view-user-detail.php">View Slots</a></li>
                             <li class="active">Slots</li>
                         </ol>
                     </div>
@@ -114,7 +115,7 @@ while ($row=mysqli_fetch_array($ret)) {
    
    <tr>
                                 <th>StreetID</th>
-                                   <td><?php  echo $row['StreetID'];?></td>
+                                   <td><?php  echo $row[StreetID'];?></td>
                                    </tr>                             
 <tr>
                                 <th>SlotName</th>
@@ -165,17 +166,10 @@ if($row['Status']=="Out")
 <form name="submit" method="post" enctype="multipart/form-data"> 
 
 <tr>
-<th>StreetID </th>
-<td>
-  <input type="text" name="street_id" id="street_id" class="form-control wd-450" >
-</td>
-</tr>
-
-<tr>
-<th>SlotName </th>
-<td>
-  <input type="text" name="slot_name" id="slot_name" class="form-control wd-450" >
-</td></tr>
+    <th>Remark :</th>
+    <td>
+    <textarea name="remark" placeholder="" rows="12" cols="14" class="form-control wd-450" required="true"></textarea></td>
+  </tr>
 
 <tr>
 <th>Fees </th>

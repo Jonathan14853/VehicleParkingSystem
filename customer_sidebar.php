@@ -23,11 +23,11 @@ $user_name=$row['user_name'];
                         <a href=""> <i class="menu-icon fa fa-dashboard"></i>Dashboard </a>
                     </li>
 <li class="active">
-                        <a href="#"> <i class="menu-icon fa fa-search"></i>Search Town </a>
+                        <a href="search_town.php"> <i class="menu-icon fa fa-search"></i>Search Town </a>
                     </li>
 
 <li class="active">
-                        <a href="#"> <i class="menu-icon fa fa-search"></i>Search Street </a>
+                        <a href="search_street.php"> <i class="menu-icon fa fa-search"></i>Search Street </a>
                     </li>
 
 <li class="active">

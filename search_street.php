@@ -50,9 +50,9 @@
                 <div class="page-header float-right">
                     <div class="page-title">
                         <ol class="breadcrumb text-right">
-                            <li><a href="search_slot.php">Dashboard</a></li>
-                            <li><a href="search_slot.php">Search parking Slots</a></li>
-                            <li class="active">Slots</li>
+                            <li><a href="search_street.php">Dashboard</a></li>
+                            <li><a href="search_street.php">Search Streets</a></li>
+                            <li class="active">Streets</li>
                         </ol>
                     </div>
                 </div>
@@ -75,7 +75,7 @@
                                    
                                    
                                        <div class="form-group row">
-                                                        <label class="col-4 col-form-label" for="example-email" style="padding-left: 50px"><strong>Search by Street Id</strong></label>
+                                                        <label class="col-4 col-form-label" for="example-email" style="padding-left: 50px"><strong>Search  street</strong></label>
                                                         <div class="col-6">
                                                             <input id="searchdata" type="text" name="searchdata" required="true" class="form-control">
                                                         </div>
@@ -106,16 +106,15 @@ $sdata=$_POST['searchdata'];
                                     <thead>
                                         <tr>
                                             <tr>
-                  <th>S.NO</th>
+                  <th>TownID</th>
             
-                  <th>Street ID</th>
-                <th>Slot Name</th>    
+                  <th>StreetName</th>  
                    <th>Action</th>
                 </tr>
                                         </tr>
                                         </thead>
                                     <?php
-$ret=mysqli_query($con,"select * from parking_slot where street_id like '%$sdata%' || slot_name like  '%$sdata%' || STATUS like  '%$sdata%'");
+$ret=mysqli_query($con,"select * from street where town_id like '%$sdata%' || street_name like  '%$sdata%' ");
 $num=mysqli_num_rows($ret);
 if($num>0){
 $cnt=1;
@@ -125,10 +124,9 @@ while ($row=mysqli_fetch_array($ret)) {
                 <tr>
                   <td><?php echo $cnt;?></td>
             
-                  <td><?php  echo $row['StreetID'];?></td>
-                  <td><?php  echo $row['SlotName'];?></td>
-                  <td><?php  echo $row['Status'];?></td>
-                  <td><a href="view-slot-detail.php?upid=<?php echo $row['StreetID'];?>">View Details</a></td>
+                  <td><?php  echo $row['TownID'];?></td>
+                  <td><?php  echo $row['StreetName'];?></td>
+                  <td><a href="view-street-detail.php?upid=<?php echo $row['TownID'];?>">View Details</a></td>
                 </tr>
                  <?php 
 $cnt=$cnt+1;

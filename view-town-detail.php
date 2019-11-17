@@ -8,16 +8,13 @@ if (strlen($_SESSION['id']==0)) {
    if(isset($_POST['submit']))
   {
     
-    #$cid=$_GET['upid'];
-      $street_id=$_POST['street_id'];
-      $slot_name=$_POST['slot_name'];
-      $status=$_POST['status'];
-      $fees=$_POST['fees'];
+      $status=$_POST['town_name'];
+      $outtime=$_POST['created_by'];
     
-   $query=mysqli_query($con, "update  parking_session set Remark='$street_id',Status='$status',Fees='$fees' where ID='$cid'");
+   $query=mysqli_query($con, "update  town set town_name='$town_name',created_by='$created_by'");
     if ($query) {
 echo '<script>alert("Details updated")</script>';
-echo "<script>window.location.href ='manage-olduser.php'</script>";
+echo "<script>window.location.href ='#'</script>";
   }
   else
     {
@@ -34,7 +31,7 @@ echo "<script>window.location.href ='manage-olduser.php'</script>";
 
 <head>
     
-    <title>CCMS New Users</title>
+    <title>Towns</title>
     
 
     <link rel="apple-touch-icon" href="apple-icon.png">
@@ -62,7 +59,7 @@ echo "<script>window.location.href ='manage-olduser.php'</script>";
     <div id="right-panel" class="right-panel">
 
         <!-- Header-->
-        <?php include_once('header.php');?>
+        <?php include_once('includes/header.php');?>
 
         <div class="breadcrumbs">
             <div class="col-sm-4">
@@ -76,9 +73,9 @@ echo "<script>window.location.href ='manage-olduser.php'</script>";
                 <div class="page-header float-right">
                     <div class="page-title">
                         <ol class="breadcrumb text-right">
-                            <li><a href="view-slot-detail.php">Dashboard</a></li>
-                            <li><a href="view-slot-detail.php">View Slots</a></li>
-                            <li class="active">Slots</li>
+                            <li><a href="view-town-detail.php">Dashboard</a></li>
+                            <li><a href="view-town-detail.php">View Towns</a></li>
+                            <li class="active">Towns</li>
                         </ol>
                     </div>
                 </div>
@@ -98,53 +95,34 @@ echo "<script>window.location.href ='manage-olduser.php'</script>";
 
                     <div class="col-lg-12">
                         <div class="card">
-                            <div class="card-header"><strong>View</strong><small> Slots</small></div>
+                            <div class="card-header"><strong>View</strong><small> Towns</small></div>
                            
                                 <p style="font-size:16px; color:red" align="center"> <?php if($msg){
     echo $msg;
   }  ?> </p>
                             <div class="card-body card-block">
  <?php
- $cid=$_GET['upid'];
-$ret=mysqli_query($con,"select * from parking_slot where ID='?'");
+$ret=mysqli_query($con,"select * from town where town_name = $town_name ");
 $cnt=1;
 while ($row=mysqli_fetch_array($ret)) {
 
 ?>                       <table border="1" class="table table-bordered mg-b-0">
    
-   <tr>
-                                <th>StreetID</th>
-                                   <td><?php  echo $row['StreetID'];?></td>
-                                   </tr>                             
+                                  <tr>
+                                  <th>StreetID</th>
+                                   <td><?php  echo $row['town_name'];?></td>
+                                  </tr>                             
 <tr>
                                 <th>SlotName</th>
-                                   <td><?php  echo $row['SlotName'];?></td>
+                                   <td><?php  echo $row['created_by'];?></td>
                                    </tr>
-                                 
-                                <tr>
-                                <th>Status</th>
-                                   <td><?php  echo $row['Status'];?></td>
-                                   </tr>
-                                   
+                                    
                   
            
-                     <tr>
-       <th>In Time</th>
-       <td><?php  echo $row['InTime'];?></td>
-</tr>
-
-
-
-    <tr>
-    <th>Status</th>
-    <td> <?php  
-if($row['Status']=="")
+<?php  
+if($row['created_by']=="")
 {
   echo "Not Updated Yet";
-}
-if($row['Status']=="Out")
-{
-  echo "Check Out";
 }
 
      ;?></td>
@@ -159,37 +137,27 @@ if($row['Status']=="Out")
                                                 </table>
 <table class="table mb-0">
 
-<?php if($row['Status']==""){ ?>
+<?php if($row['town_name']==""){ ?>
 
 
 <form name="submit" method="post" enctype="multipart/form-data"> 
 
+
 <tr>
-<th>StreetID </th>
+<th>Town Name </th>
 <td>
-  <input type="text" name="street_id" id="street_id" class="form-control wd-450" >
+  <input type="text" name="town_name" id="town_name" class="form-control wd-450" >
 </td>
 </tr>
 
 <tr>
-<th>SlotName </th>
+<th>Created By </th>
 <td>
-  <input type="text" name="slot_name" id="slot_name" class="form-control wd-450" >
-</td></tr>
+  <input type="text" name="created_by" id="created_by" class="form-control wd-450" >
+</td>
+</tr>
 
-<tr>
-<th>Fees </th>
-<td>
-  <input type="text" name="fees" id="fees" class="form-control wd-450" >
-</td></tr>
-
-  <tr>
-    <th>Status :</th>
-    <td>
-   <select name="status" class="form-control wd-450" required="true" >
-     <option value="Out">Check Out</option>
-   </select></td>
-  </tr>
+ 
 
   <tr align="center">
     <td colspan="2"><button type="submit" name="submit" class="btn btn-primary btn-sm"><i class="fa fa-dot-circle-o"></i> Update</button></td>
@@ -198,24 +166,19 @@ if($row['Status']=="Out")
 <?php } else { ?>
     <table border="1" class="table table-bordered mg-b-0">
   <tr>
-    <th>Remark</th>
-    <td><?php echo $row['Remark']; ?></td>
-  </tr>
-<tr>
-   <tr>
-    <th>Out Time</th>
-    <td><?php echo $row['OutTime']; ?></td>
+    <th>TownName</th>
+    <td><?php echo $row['TownName']; ?></td>
   </tr>
 
   
  <tr>
-    <th>Fees</th>
-    <td><?php echo $row['Fees']; ?></td>
+    <th></th>
+    <td><?php echo $row['created_by']; ?></td>
   </tr>
 
 <tr>
-<th>Updation Date</th>
-<td><?php echo $row['UpdationDate']; ?>  </td></tr>
+<th>Modified Date</th>
+<td><?php echo $row['modified_date']; ?>  </td></tr>
 <?php } ?>
 </table>
 
