@@ -80,8 +80,8 @@ echo "<script>window.location.href ='add-slots.php'</script>";
                 <div class="page-header float-right">
                     <div class="page-title">
                         <ol class="breadcrumb text-right">
-                            <li><a href="dashboard.php">Dashboard</a></li>
-                            <li><a href="add-users.php">Slot Detail</a></li>
+                            <li><a href="add-slots.php">Dashboard</a></li>
+                            <li><a href="add-slots.php">Slot Detail</a></li>
                             <li class="active">Add</li>
                         </ol>
                     </div>

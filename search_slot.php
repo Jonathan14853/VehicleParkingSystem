@@ -115,7 +115,7 @@ $sdata=$_POST['searchdata'];
                                         </tr>
                                         </thead>
                                     <?php
-$ret=mysqli_query($con,"select * from parking_slot where street_id like '%$sdata%' || slot_name like  '%$sdata%' ");
+$ret=mysqli_query($con,"select * from parking_slot where street_id like '%$sdata%' || slot_name like  '%$sdata%' || STATUS like  '%$sdata%'");
 $num=mysqli_num_rows($ret);
 if($num>0){
 $cnt=1;
@@ -127,6 +127,7 @@ while ($row=mysqli_fetch_array($ret)) {
             
                   <td><?php  echo $row['StreetID'];?></td>
                   <td><?php  echo $row['SlotName'];?></td>
+                  <td><?php  echo $row['Status'];?></td>
                   <td><a href="view-slot-detail.php?upid=<?php echo $row['ID'];?>">View Details</a></td>
                 </tr>
                  <?php 

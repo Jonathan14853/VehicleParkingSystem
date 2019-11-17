@@ -22,12 +22,22 @@ $user_name=$row['user_name'];
                     <li class="active">
                         <a href=""> <i class="menu-icon fa fa-dashboard"></i>Dashboard </a>
                     </li>
+<li class="active">
+                        <a href="#"> <i class="menu-icon fa fa-search"></i>Search Town </a>
+                    </li>
 
+<li class="active">
+                        <a href="#"> <i class="menu-icon fa fa-search"></i>Search Street </a>
+                    </li>
+
+<li class="active">
+                        <a href="search_slot.php"> <i class="menu-icon fa fa-search"></i>Search Slot </a>
+                    </li>
 
 
 
  <li class="menu-item-has-children dropdown">
-                        <a href="add-slots.php" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-user"></i>Parking Slots</a>
+                        <a href="add-slots.php" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-car"></i>Parking Slots</a>
                         <ul class="sub-menu children dropdown-menu">
                             <li><i class="fa fa-user"></i><a href="manage-oldslots.php">View Old Slots</a>
                             </li>

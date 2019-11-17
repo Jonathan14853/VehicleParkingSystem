@@ -22,17 +22,38 @@ $row=mysqli_fetch_array($ret);
                     <li class="active">
                         <a href="welcome.php"> <i class="menu-icon fa fa-dashboard"></i>Dashboard </a>
                     </li>
+<li class="menu-item-has-children dropdown">
+                        <a href="add-users.php" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-building"></i>Towns</a>
+                        <ul class="sub-menu children dropdown-menu">
+                            <li><i class="fa fa-building"></i><a href="#">Add Town</a></li>
+                            <li><i class="fa fa-user"></i><a href="#">Manage New Towns</a>
+                            </li>
+                            <li><i class="fa fa-user"></i><a href="#">View Towns</a>
+                            </li>
+                          
+                        </ul>
+                    </li>
 
 
-
+<li class="menu-item-has-children dropdown">
+                        <a href="add-users.php" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-bars"></i>Streets</a>
+                        <ul class="sub-menu children dropdown-menu">
+                            <li><i class="fa fa-user"></i><a href="#">Add Street</a></li>
+                            <li><i class="fa fa-user"></i><a href="#">Manage New Slots</a>
+                            </li>
+                            <li><i class="fa fa-user"></i><a href="#">View  Streets</a>
+                            </li>
+                          
+                        </ul>
+                    </li>
 
  <li class="menu-item-has-children dropdown">
-                        <a href="add-users.php" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-user"></i>Slots</a>
+                        <a href="add-users.php" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-car"></i>Slots</a>
                         <ul class="sub-menu children dropdown-menu">
                             <li><i class="fa fa-user"></i><a href="add-slots.php">Add Slot</a></li>
                             <li><i class="fa fa-user"></i><a href="manage-newslots.php">Manage New Slots</a>
                             </li>
-                            <li><i class="fa fa-user"></i><a href="../manage-oldslots.php">View Old Slots</a>
+                            <li><i class="fa fa-user"></i><a href="../manage-oldslots.php">View  Slots</a>
                             </li>
                           
                         </ul>

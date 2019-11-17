@@ -97,9 +97,10 @@ while ($row=mysqli_fetch_array($ret)) {
                 <tr>
                   <td><?php echo $cnt;?></td>
             
-                  <td><?php  echo $row['RegNumber'];?></td>
-                  <td><?php  echo $row['FullName'];?></td>
-                  <td><a href="view-regnewusers-detail.php?viewid=<?php echo $row['ID'];?>">View Details</a></td>
+                  <td><?php  echo $row['StreetID'];?></td>
+                  <td><?php  echo $row['SlotName'];?></td>
+                  <td><?php  echo $row['Status'];?></td>
+                  <td><a href="view-regnewslots-detail.php?viewid=<?php echo $row['ID'];?>">View Details</a></td>
                 </tr>
                 <?php 
 $cnt=$cnt+1;
