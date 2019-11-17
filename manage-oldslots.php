@@ -56,7 +56,7 @@ if (strlen($_SESSION['id']==0)) {
                     <div class="page-title">
                         <ol class="breadcrumb text-right">
                             <li><a href="welcome.php">Dashboard</a></li>
-                            <li><a href="manage-newslots.php">New Slots</a></li>
+                            <li><a href="#">New Slots</a></li>
                             <li class="active">New Slots</li>
                         </ol>
                     </div>

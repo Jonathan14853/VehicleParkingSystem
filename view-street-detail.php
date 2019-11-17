@@ -9,16 +9,13 @@ if (strlen($_SESSION['id']==0)) {
   {
     
     #$cid=$_GET['upid'];
-      $remark=$_POST['remark'];
-      $status=$_POST['status'];
-      $outtime=$_POST['outtime'];
-      $totalhrs=$_POST['totalhrs'];
-      $fees=$_POST['fees'];
-    
-   $query=mysqli_query($con, "update  parking_session set Remark='$remark',Status='$status',Fees='$fees' where ID='$cid'");
+      $town_id=$_POST['town_id'];
+      $street_name=$_POST['street_name'];
+      
+   $query=mysqli_query($con, "update  street set town_id='$town_id',street_name='$street_name'");
     if ($query) {
 echo '<script>alert("Details updated")</script>';
-echo "<script>window.location.href ='manage-olduser.php'</script>";
+echo "<script>window.location.href ='manage-old-street.php'</script>";
   }
   else
     {
@@ -58,12 +55,12 @@ echo "<script>window.location.href ='manage-olduser.php'</script>";
 <body>
     <!-- Left Panel -->
 
-    <?php include_once('includes/sidebar.php');?>
+    <?php include_once('customer_sidebar.php');?>
 
     <div id="right-panel" class="right-panel">
 
         <!-- Header-->
-        <?php include_once('includes/header.php');?>
+        <?php include_once('header.php');?>
 
         <div class="breadcrumbs">
             <div class="col-sm-4">
@@ -78,8 +75,8 @@ echo "<script>window.location.href ='manage-olduser.php'</script>";
                     <div class="page-title">
                         <ol class="breadcrumb text-right">
                             <li><a href="dashboard.php">Dashboard</a></li>
-                            <li><a href="view-user-detail.php">View Slots</a></li>
-                            <li class="active">Slots</li>
+                            <li><a href="view-street-detail.php">View Streets</a></li>
+                            <li class="active">Streets</li>
                         </ol>
                     </div>
                 </div>
@@ -106,47 +103,35 @@ echo "<script>window.location.href ='manage-olduser.php'</script>";
   }  ?> </p>
                             <div class="card-body card-block">
  <?php
- $cid=$_GET['upid'];
-$ret=mysqli_query($con,"select * from parking_slot where ID='?'");
+ #$cid=$_GET['upid'];
+$ret=mysqli_query($con,"select * from street where town_id='$town_id'");
 $cnt=1;
 while ($row=mysqli_fetch_array($ret)) {
 
 ?>                       <table border="1" class="table table-bordered mg-b-0">
    
    <tr>
-                                <th>StreetID</th>
-                                   <td><?php  echo $row[StreetID'];?></td>
+                                <th>TownID</th>
+                                <th>StreetName</th>
+
+                                   <td><?php  echo $row['TownID'];?></td>
                                    </tr>                             
 <tr>
                                 <th>SlotName</th>
-                                   <td><?php  echo $row['SlotName'];?></td>
+                                   <td><?php  echo $row['TownName'];?></td>
                                    </tr>
                                  
-                                <tr>
-                                <th>Status</th>
-                                   <td><?php  echo $row['Status'];?></td>
-                                   </tr>
-                                   
+
                   
-           
-                     <tr>
-       <th>In Time</th>
-       <td><?php  echo $row['InTime'];?></td>
-</tr>
-
-
-
-    <tr>
-    <th>Status</th>
-    <td> <?php  
-if($row['Status']=="")
+         <?php  
+if($row['town_name']=="")
 {
   echo "Not Updated Yet";
 }
-if($row['Status']=="Out")
+/*if($row['Status']=="Out")
 {
   echo "Check Out";
-}
+}*/
 
      ;?></td>
   </tr>
