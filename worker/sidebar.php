@@ -25,11 +25,11 @@ $row=mysqli_fetch_array($ret);
 <li class="menu-item-has-children dropdown">
                         <a href="add-users.php" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-building"></i>Towns</a>
                         <ul class="sub-menu children dropdown-menu">
-                            <li><i class="fa fa-building"></i><a href="#">Add Town</a></li>
-                            <li><i class="fa fa-user"></i><a href="#">Manage New Towns</a>
-                            </li>
+                            <li><i class="fa fa-building"></i><a href="add-town.php">Add Town</a></li>
+                            <li><i class="fa fa-user"></i><a href="manage-town.php">Manage Towns</a>
+                            <!--/li>
                             <li><i class="fa fa-user"></i><a href="#">View Towns</a>
-                            </li>
+                            </li-->
                           
                         </ul>
                     </li>
@@ -38,11 +38,11 @@ $row=mysqli_fetch_array($ret);
 <li class="menu-item-has-children dropdown">
                         <a href="add-users.php" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-bars"></i>Streets</a>
                         <ul class="sub-menu children dropdown-menu">
-                            <li><i class="fa fa-user"></i><a href="#">Add Street</a></li>
-                            <li><i class="fa fa-user"></i><a href="#">Manage New Slots</a>
-                            </li>
+                            <li><i class="fa fa-user"></i><a href="add-street.php">Add Street</a></li>
+                            <li><i class="fa fa-user"></i><a href="manage-street.php">Manage Streets</a>
+                            <!--/li>
                             <li><i class="fa fa-user"></i><a href="#">View  Streets</a>
-                            </li>
+                            </li-->
                           
                         </ul>
                     </li>

@@ -14,7 +14,7 @@ if (strlen($_SESSION['id']==0)) {
       $status=$_POST['status'];
       $fees=$_POST['fees'];
     
-   $query=mysqli_query($con, "update  parking_session set Remark='$street_id',Status='$status',Fees='$fees' where ID='$cid'");
+   $query=mysqli_query($con, "update  parking_slot set Remark='$street_id',Status='$status',Fees='$fees' where ID='$cid'");
     if ($query) {
 echo '<script>alert("Details updated")</script>';
 echo "<script>window.location.href ='manage-olduser.php'</script>";
@@ -105,8 +105,8 @@ echo "<script>window.location.href ='manage-olduser.php'</script>";
   }  ?> </p>
                             <div class="card-body card-block">
  <?php
- $cid=$_GET['upid'];
-$ret=mysqli_query($con,"select * from parking_slot where ID='?'");
+ #$cid=$_GET['upid'];
+$ret=mysqli_query($con,"select * from parking_slot where street_id='$street_id'");
 $cnt=1;
 while ($row=mysqli_fetch_array($ret)) {
 

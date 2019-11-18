@@ -1,20 +1,21 @@
 <?php
 session_start();
 error_reporting(0);
-include('dbconnection.php');
+include('../dbconnection.php');
 if (strlen($_SESSION['id']==0)) {
   header('location:logout.php');
   } else{
    if(isset($_POST['submit']))
   {
     
-      $status=$_POST['town_name'];
-      $outtime=$_POST['created_by'];
+      $town_name=$_POST['town_name'];
+      $created_by=$_POST['created_by'];
+      $is_deleted=$_POST['is_deleted'];
     
-   $query=mysqli_query($con, "update  town set town_name='$town_name',created_by='$created_by'");
+   $query=mysqli_query($con, "update  town set town_name='$town_name',created_by='$created_by',is_deleted='$is_deleted' ");
     if ($query) {
 echo '<script>alert("Details updated")</script>';
-echo "<script>window.location.href ='#'</script>";
+echo "<script>window.location.href ='manage-old-town.php'</script>";
   }
   else
     {
@@ -31,7 +32,7 @@ echo "<script>window.location.href ='#'</script>";
 
 <head>
     
-    <title>Towns</title>
+    <title>Streets</title>
     
 
     <link rel="apple-touch-icon" href="apple-icon.png">
@@ -54,12 +55,12 @@ echo "<script>window.location.href ='#'</script>";
 <body>
     <!-- Left Panel -->
 
-    <?php include_once('customer_sidebar.php');?>
+    <?php include_once('sidebar.php');?>
 
     <div id="right-panel" class="right-panel">
 
         <!-- Header-->
-        <?php include_once('includes/header.php');?>
+        <?php include_once('../header.php');?>
 
         <div class="breadcrumbs">
             <div class="col-sm-4">
@@ -102,7 +103,7 @@ echo "<script>window.location.href ='#'</script>";
   }  ?> </p>
                             <div class="card-body card-block">
  <?php
-$ret=mysqli_query($con,"select * from town where town_name = $town_name ");
+$ret=mysqli_query($con,"select * from town where town_name = '$town_name' and created_by='$created_by' and is_deleted='$is_deletd'");
 $cnt=1;
 while ($row=mysqli_fetch_array($ret)) {
 
@@ -111,10 +112,16 @@ while ($row=mysqli_fetch_array($ret)) {
                                   <tr>
                                   <th>StreetID</th>
                                    <td><?php  echo $row['town_name'];?></td>
-                                  </tr>                             
-<tr>
+                                  </tr> 
+
+                                  <tr>
                                 <th>SlotName</th>
                                    <td><?php  echo $row['created_by'];?></td>
+                                   </tr>
+
+                                   <tr>
+                                <th>is_deleted</th>
+                                   <td><?php  echo $row['is_deleted'];?></td>
                                    </tr>
                                     
                   
@@ -157,10 +164,18 @@ if($row['created_by']=="")
 </td>
 </tr>
 
+<tr>
+<th>IsDeleted </th>
+<td>
+  <input type="text" name="is_deleted" id="is_deleted" class="form-control wd-450" >
+</td>
+</tr>
+
  
 
   <tr align="center">
-    <td colspan="2"><button type="submit" name="submit" class="btn btn-primary btn-sm"><i class="fa fa-dot-circle-o"></i> Update</button></td>
+    <td colspan="2"><button type="submit" name="submit" class="btn btn-primary btn-sm">
+      <i class="fa fa-dot-circle-o"></i> Update</button></td>
   </tr>
   </form>
 <?php } else { ?>
@@ -177,8 +192,8 @@ if($row['created_by']=="")
   </tr>
 
 <tr>
-<th>Modified Date</th>
-<td><?php echo $row['modified_date']; ?>  </td></tr>
+<th>is_deleted</th>
+<td><?php echo $row['is_deleted']; ?>  </td></tr>
 <?php } ?>
 </table>
 

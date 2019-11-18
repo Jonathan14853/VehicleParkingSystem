@@ -11,8 +11,12 @@ if (strlen($_SESSION['id']==0)) {
     #$cid=$_GET['upid'];
       $town_id=$_POST['town_id'];
       $street_name=$_POST['street_name'];
+      $created_by=$_POST['created_by'];
+      $is_deleted=$_POST['is_deleted'];
+    
+
       
-   $query=mysqli_query($con, "update  street set town_id='$town_id',street_name='$street_name'");
+   $query=mysqli_query($con, "update  street set town_id='$town_id',street_name='$street_name',created_by='$created_by',is_deleted='$is_deleted'");
     if ($query) {
 echo '<script>alert("Details updated")</script>';
 echo "<script>window.location.href ='manage-old-street.php'</script>";
@@ -32,7 +36,7 @@ echo "<script>window.location.href ='manage-old-street.php'</script>";
 
 <head>
     
-    <title>CCMS New Users</title>
+    <title>New Streets</title>
     
 
     <link rel="apple-touch-icon" href="apple-icon.png">
@@ -55,12 +59,12 @@ echo "<script>window.location.href ='manage-old-street.php'</script>";
 <body>
     <!-- Left Panel -->
 
-    <?php include_once('customer_sidebar.php');?>
+    <?php include_once('sidebar.php');?>
 
     <div id="right-panel" class="right-panel">
 
         <!-- Header-->
-        <?php include_once('header.php');?>
+        <?php include_once('../header.php');?>
 
         <div class="breadcrumbs">
             <div class="col-sm-4">
@@ -74,7 +78,7 @@ echo "<script>window.location.href ='manage-old-street.php'</script>";
                 <div class="page-header float-right">
                     <div class="page-title">
                         <ol class="breadcrumb text-right">
-                            <li><a href="dashboard.php">Dashboard</a></li>
+                            <li><a href="view-street-detail.php">Dashboard</a></li>
                             <li><a href="view-street-detail.php">View Streets</a></li>
                             <li class="active">Streets</li>
                         </ol>
@@ -96,7 +100,7 @@ echo "<script>window.location.href ='manage-old-street.php'</script>";
 
                     <div class="col-lg-12">
                         <div class="card">
-                            <div class="card-header"><strong>View</strong><small> Slots</small></div>
+                            <div class="card-header"><strong>View</strong><small> Streets</small></div>
                            
                                 <p style="font-size:16px; color:red" align="center"> <?php if($msg){
     echo $msg;
@@ -110,15 +114,25 @@ while ($row=mysqli_fetch_array($ret)) {
 
 ?>                       <table border="1" class="table table-bordered mg-b-0">
    
-   <tr>
-                                <th>TownID</th>
-                                <th>StreetName</th>
+                                <tr>
+                                  <th>TownID</th>
+                                  <th>StreetName</th>
+                                  <th>created_by</th>
+                                  <th>is_deleted</th>
 
-                                   <td><?php  echo $row['TownID'];?></td>
+                                    <td><?php  echo $row['TownID'];?></td>
                                    </tr>                             
-<tr>
-                                <th>SlotName</th>
-                                   <td><?php  echo $row['TownName'];?></td>
+                                <tr>
+                                    <th>StreetName</th>
+                                      <td><?php  echo $row['StreetName'];?></td>
+                                   </tr>
+                                   <tr>
+                                    <th>created_by</th>
+                                      <td><?php  echo $row['created_by'];?></td>
+                                   </tr>
+                                   <tr>
+                                    <th>is_delted</th>
+                                      <td><?php  echo $row['is_deleted'];?></td>
                                    </tr>
                                  
 
@@ -133,19 +147,21 @@ if($row['town_name']=="")
   echo "Check Out";
 }*/
 
-     ;?></td>
+     ;?>
+   </td>
   </tr>
 </table>
-                                                    </div>
+          </div>
                                                     
                                                     
                                                     
                                                     
-                                                </div>
-                                                </table>
+                                              
+        </div>
+        </table>
 <table class="table mb-0">
 
-<?php if($row['Status']==""){ ?>
+<?php /*if($row['Status']==""){ ?>
 
 
 <form name="submit" method="post" enctype="multipart/form-data"> 
@@ -153,14 +169,8 @@ if($row['town_name']=="")
 <tr>
     <th>Remark :</th>
     <td>
-    <textarea name="remark" placeholder="" rows="12" cols="14" class="form-control wd-450" required="true"></textarea></td>
+    <townname="remark" placeholder="" rows="12" cols="14" class="form-control wd-450" required="true"></textarea></td>
   </tr>
-
-<tr>
-<th>Fees </th>
-<td>
-  <input type="text" name="fees" id="fees" class="form-control wd-450" >
-</td></tr>
 
   <tr>
     <th>Status :</th>
@@ -195,7 +205,7 @@ if($row['town_name']=="")
 <tr>
 <th>Updation Date</th>
 <td><?php echo $row['UpdationDate']; ?>  </td></tr>
-<?php } ?>
+<?php } */?>
 </table>
 
 
@@ -203,7 +213,7 @@ if($row['town_name']=="")
 
   
 
-<?php } ?>
+<?php/* } */?>
 
                                             </div>
 
