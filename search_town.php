@@ -13,7 +13,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Parking Slot Search</title>
+	<title>Search Town</title>
 
     <link rel="apple-touch-icon" href="apple-icon.png">
     <link rel="shortcut icon" href="favicon.ico">
@@ -106,14 +106,16 @@ $sdata=$_POST['searchdata'];
                                     <thead>
                                         <tr>
                                             <tr>
-                <th>TownName</th>
-                <th>created_by</th>    
+                  <th>id</th>                              
+                <th>Town Name</th>
+                <th>created_by</th> 
+                <th>is_deleted</th>   
                    <th>Action</th>
                 </tr>
                                         </tr>
                                         </thead>
                                     <?php
-$ret=mysqli_query($con,"select * from town where town_name like '%$sdata%' || created_by like  '%$sdata%' ");
+$ret=mysqli_query($con,"SELECT * FROM town ");
 $num=mysqli_num_rows($ret);
 if($num>0){
 $cnt=1;
@@ -122,10 +124,11 @@ while ($row=mysqli_fetch_array($ret)) {
               
                 <tr>
                   <td><?php echo $cnt;?></td>
-            
-                  <td><?php  echo $row['TownName'];?></td>
+                    
+                  <td><?php  echo $row['town_name'];?></td>
                   <td><?php  echo $row['created_by'];?></td>
-                  <td><a href="view-town-detail.php?upid=<?php echo $row['ID'];?>">View Details</a></td>
+                  <td><?php  echo $row['is_deleted'];?></td>
+                  <td><a href="view-town-detail.php?upid=<?php echo $row['id'];?>">View Details</a></td>
                 </tr>
                  <?php 
 $cnt=$cnt+1;

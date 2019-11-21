@@ -66,6 +66,7 @@
                                     <thead>
                                         <tr>
                                             <tr>
+                <th>id</th>                          
                   <th>plate_number</th>
                   <th>state</th> 
                   <th>created_by</th>
@@ -75,7 +76,7 @@
                                         </tr>
                                         </thead>
                                     <?php
-$ret=mysqli_query($con,"select * from parking_session");
+$ret=mysqli_query($con,"select * from parking_session ");
 $cnt=1;
 while ($row=mysqli_fetch_array($ret)) {
 
@@ -86,7 +87,7 @@ while ($row=mysqli_fetch_array($ret)) {
              <td><?php  echo $row['plate_number'];?></td>
                   <td><?php  echo $row['state'];?></td>
                   <td><?php  echo $row['created_by'];?></td>
-                  <td><?php  echo $row['is_delted'];?></td>
+                  <td><?php  echo $row['is_deleted'];?></td>
                  
                   <td ><a href="view-park-detail.php?upid=<?php echo $row['id'];?>">Update</a>
                 </tr>

@@ -14,7 +14,7 @@ if (strlen($_SESSION['id']==0)) {
     
 
     
-   $query=mysqli_query($con, "update  parking_slot set plate_number='$plate_number',state='$state',created_by='$created_by',is_deleted='$is_deleted'");
+   $query=mysqli_query($con, "UPDATE  parking_slot SET plate_number='$plate_number',state='$state',created_by='$created_by',is_deleted='$is_deleted'");
     if ($query) {
 echo '<script>alert("Details updated")</script>';
 echo "<script>window.location.href ='manage-olduser.php'</script>";
@@ -67,7 +67,7 @@ echo "<script>window.location.href ='manage-olduser.php'</script>";
             <div class="col-sm-4">
                 <div class="page-header float-left">
                     <div class="page-title">
-                        <h1>View Users</h1>
+                        <h1>View Parking Sessions</h1>
                     </div>
                 </div>
             </div>
@@ -75,8 +75,8 @@ echo "<script>window.location.href ='manage-olduser.php'</script>";
                 <div class="page-header float-right">
                     <div class="page-title">
                         <ol class="breadcrumb text-right">
-                            <li><a href="view-slot-detail.php">Dashboard</a></li>
-                            <li><a href="view-slot-detail.php">View Slots</a></li>
+                            <li><a href="view-park-detail.php">Dashboard</a></li>
+                            <li><a href="view-park-detail.php">View Slots</a></li>
                             <li class="active">Slots</li>
                         </ol>
                     </div>

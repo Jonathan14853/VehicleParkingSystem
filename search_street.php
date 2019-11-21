@@ -106,15 +106,17 @@ $sdata=$_POST['searchdata'];
                                     <thead>
                                         <tr>
                                             <tr>
-                  <th>TownID</th>
-            
-                  <th>StreetName</th>  
+                  <th>id</th>                          
+                  <th>town_id</th>
+                  <th>street_name</th>
+                  <th>created_by</th>
+                  <th>is_deleted</th>  
                    <th>Action</th>
                 </tr>
                                         </tr>
                                         </thead>
                                     <?php
-$ret=mysqli_query($con,"select * from street where town_id like '%$sdata%' || street_name like  '%$sdata%' ");
+$ret=mysqli_query($con,"select * from street ");
 $num=mysqli_num_rows($ret);
 if($num>0){
 $cnt=1;
@@ -124,9 +126,12 @@ while ($row=mysqli_fetch_array($ret)) {
                 <tr>
                   <td><?php echo $cnt;?></td>
             
-                  <td><?php  echo $row['TownID'];?></td>
-                  <td><?php  echo $row['StreetName'];?></td>
-                  <td><a href="view-street-detail.php?upid=<?php echo $row['TownID'];?>">View Details</a></td>
+                  
+                  <td><?php  echo $row['town_id'];?></td>
+                  <td><?php  echo $row['street_name'];?></td>
+                  <td><?php  echo $row['created_by'];?></td>
+                  <td><?php  echo $row['is_deleted'];?></td>
+                  <td><a href="view-street-detail.php?upid=<?php echo $row['id'];?>">View Details</a></td>
                 </tr>
                  <?php 
 $cnt=$cnt+1;

@@ -59,22 +59,25 @@
                     <div class="col-lg-12">
                         <div class="card">
                             <div class="card-header">
-                                <strong class="card-title">New Users</strong>
+                                <strong class="card-title">Latest Payment</strong>
                             </div>
                             <div class="card-body">
                                 <table class="table">
                                     <thead>
                                         <tr>
                                             <tr>
-                  <th>ReferenceCode</th>
-                  <th>TransactionNumber</th> 
-                  <th>Amount</th>
-                 <th>Action</th>
-                </tr>
-                                        </tr>
+                                                <th>id</th>
+                                                  <th>ReferenceCode</th>
+                                                  <th>TransactionNumber</th> 
+                                                  <th>Amount</th>
+                                                  <th>Created_By</th>
+                                                  <th>Is_Deleted</th>
+                                                 <th>Action</th>
+                            </tr>
+                                     </tr>
                                         </thead>
                                     <?php
-$ret=mysqli_query($con,"select * from parking_session");
+$ret=mysqli_query($con,"select * from payment");
 $cnt=1;
 while ($row=mysqli_fetch_array($ret)) {
 
@@ -82,10 +85,13 @@ while ($row=mysqli_fetch_array($ret)) {
               
                 <tr>
                   <td><?php echo $cnt;?></td>
-             <td><?php  echo $row['ReferenceCode'];?></td>
-                  <td><?php  echo $row['TransactionNumber'];?></td>
+             <td><?php  echo $row['reference_code'];?></td>
+                  <td><?php  echo $row['transaction_number'];?></td>
+                  <td><?php  echo $row['amount'];?></td>
+                  <td><?php  echo $row['created_by'];?></td>
+                  <td><?php  echo $row['is_deleted'];?></td>
                  
-                  <td ><a href="view-payment-detail.php?upid=<?php echo $row['ID'];?>">Update</a>
+                  <td ><a href="view-payment-detail.php?upid=<?php echo $row['id'];?>">Update</a>
                 </tr>
                 <?php 
 $cnt=$cnt+1;

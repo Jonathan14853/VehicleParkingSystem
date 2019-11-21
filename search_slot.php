@@ -106,16 +106,18 @@ $sdata=$_POST['searchdata'];
                                     <thead>
                                         <tr>
                                             <tr>
-                  <th>S.NO</th>
-            
+                  <th>id</th>
                   <th>Street ID</th>
-                <th>Slot Name</th>    
+                <th>Slot Name</th> 
+                <th>status</th>
+                <th>created_by</th>
+                <th>is_deleted</th>   
                    <th>Action</th>
                 </tr>
                                         </tr>
                                         </thead>
                                     <?php
-$ret=mysqli_query($con,"select * from parking_slot where street_id like '%$sdata%' || slot_name like  '%$sdata%' || STATUS like  '%$sdata%'");
+$ret=mysqli_query($con,"select * from parking_slot where street_id like '%$sdata%' || slot_name like  '%$sdata%' || STATUS like  '%$sdata%' || created_by like  '%$sdata%' || is_deleted like  '%$sdata%'");
 $num=mysqli_num_rows($ret);
 if($num>0){
 $cnt=1;
@@ -124,11 +126,13 @@ while ($row=mysqli_fetch_array($ret)) {
               
                 <tr>
                   <td><?php echo $cnt;?></td>
-            
-                  <td><?php  echo $row['StreetID'];?></td>
-                  <td><?php  echo $row['SlotName'];?></td>
-                  <td><?php  echo $row['Status'];?></td>
-                  <td><a href="view-slot-detail.php?upid=<?php echo $row['StreetID'];?>">View Details</a></td>
+                    <td><?php  echo $row['id'];?></td>
+                  <td><?php  echo $row['street_id'];?></td>
+                  <td><?php  echo $row['slot_name'];?></td>
+                  <td><?php  echo $row['status'];?></td>
+                  <td><?php  echo $row['created_by'];?></td>
+                  <td><?php  echo $row['is_deleted'];?></td>
+                  <td><a href="view-slot-detail.php?upid=<?php echo $row['ID'];?>">View Details</a></td>
                 </tr>
                  <?php 
 $cnt=$cnt+1;

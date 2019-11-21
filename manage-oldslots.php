@@ -77,15 +77,18 @@ if (strlen($_SESSION['id']==0)) {
                                     <thead>
                                         <tr>
                                             <tr>
+                  <th>ID</th>                              
                   <th>StreetID</th>
                   <th>SlotName</th> 
                   <th>Status</th>
+                  <th>Created_By</th>
+                  <th>Is_Deleted</th>
                  <th>Action</th>
                 </tr>
                                         </tr>
                                         </thead>
                                     <?php
-$ret=mysqli_query($con,"select *from parking_slot  where status='Out'");
+$ret=mysqli_query($con,"select *from parking_slot ");
 $cnt=1;
 while ($row=mysqli_fetch_array($ret)) {
 
@@ -93,8 +96,12 @@ while ($row=mysqli_fetch_array($ret)) {
               
                 <tr>
                   <td><?php echo $cnt;?></td>
-             <td><?php  echo $row['StreetID'];?></td>
-                  <td><?php  echo $row['SlotName'];?></td>
+
+             <td><?php  echo $row['street_id'];?></td>
+                  <td><?php  echo $row['slot_name'];?></td>
+                  <td><?php  echo $row['status'];?></td>
+                  <td><?php  echo $row['created_by'];?></td>
+                  <td><?php  echo $row['is_deleted'];?></td>
                  
                   <td ><a href="view-slot-detail.php?upid=<?php echo $row['ID'];?>">View</a>
                 </tr>

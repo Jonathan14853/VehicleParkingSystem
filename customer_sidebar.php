@@ -64,11 +64,6 @@ $user_name=$row['user_name'];
                            
                         </ul>
                     </li>
-                    
-    
-<li class="active">
-                        <a href="search_slot.php"> <i class="menu-icon fa fa-search"></i>Search </a>
-                    </li>
   <li class="menu-item-has-children dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-tasks"></i>Reports</a>
                         <ul class="sub-menu children dropdown-menu">

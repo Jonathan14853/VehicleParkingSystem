@@ -7,15 +7,13 @@ if (strlen($_SESSION['id']==0)) {
   } else{
    if(isset($_POST['submit']))
   {
+    $town_name = $_POST['town_name'];
+    $created_by = $_POST['created_by'];
+    $is_deleted = $_POST['is_deleted'];
     
-    #$cid=$_GET['upid'];
-      $street_id=$_POST['street_id'];
-      $slot_name=$_POST['slot_name'];
-      $status=$_POST['status'];
-      $created_by = $_POST['created_by'];
-      $is_deleted = $_POST['is_deleted'];
+
     
-   $query=mysqli_query($con, "update  parking_slot set street_id='$street_id',slot_name = '$slot_name',Status='$status',created_by='$created_by' is_deleted = $is_deleted");
+   $query=mysqli_query($con, "UPDATE  parking_slot SET $town_name='$town_name',created_by='$created_by',is_deleted='$is_deleted'");
     if ($query) {
 echo '<script>alert("Details updated")</script>';
 echo "<script>window.location.href ='manage-olduser.php'</script>";
@@ -30,12 +28,11 @@ echo "<script>window.location.href ='manage-olduser.php'</script>";
 
 ?>
 
-<!doctype html>
 <html class="no-js" lang="en">
 
 <head>
     
-    <title>New Slots</title>
+    <title>Parking Session</title>
     
 
     <link rel="apple-touch-icon" href="apple-icon.png">
@@ -69,7 +66,7 @@ echo "<script>window.location.href ='manage-olduser.php'</script>";
             <div class="col-sm-4">
                 <div class="page-header float-left">
                     <div class="page-title">
-                        <h1>View Slots</h1>
+                        <h1>View Parking Sessions</h1>
                     </div>
                 </div>
             </div>
@@ -77,9 +74,9 @@ echo "<script>window.location.href ='manage-olduser.php'</script>";
                 <div class="page-header float-right">
                     <div class="page-title">
                         <ol class="breadcrumb text-right">
-                            <li><a href="view-slot-detail.php">Dashboard</a></li>
-                            <li><a href="view-slot-detail.php">View Slots</a></li>
-                            <li class="active">Slots</li>
+                            <li><a href="view-park-detail.php">Dashboard</a></li>
+                            <li><a href="view-park-detail.php">View Streets</a></li>
+                            <li class="active">Streets</li>
                         </ol>
                     </div>
                 </div>
@@ -99,7 +96,7 @@ echo "<script>window.location.href ='manage-olduser.php'</script>";
 
                     <div class="col-lg-12">
                         <div class="card">
-                            <div class="card-header"><strong>View</strong><small> Slots</small></div>
+                            <div class="card-header"><strong>View</strong><small> Sessions</small></div>
                            
                                 <p style="font-size:16px; color:red" align="center"> <?php if($msg){
     echo $msg;
@@ -107,51 +104,27 @@ echo "<script>window.location.href ='manage-olduser.php'</script>";
                             <div class="card-body card-block">
  <?php
  #$cid=$_GET['upid'];
-$ret=mysqli_query($con,"select * from parking_slot where street_id='$street_id'");
+$ret=mysqli_query($con,"select * from town ");
 $cnt=1;
 while ($row=mysqli_fetch_array($ret)) {
 
 ?>                       <table border="1" class="table table-bordered mg-b-0">
    
-   <tr>
-                                <th>StreetID</th>
-                                   <td><?php  echo $row['StreetID'];?></td>
-                                   </tr>                             
-<tr>
-                                <th>SlotName</th>
-                                   <td><?php  echo $row['SlotName'];?></td>
-                                   </tr>
-                                 
-                                <tr>
-                                <th>Status</th>
-                                   <td><?php  echo $row['Status'];?></td>
-                                   </tr>
-                                   <tr>
+                              <tr>
+                                <th>Town Name</th>
+                                   <td><?php  echo $row['town_name'];?></td>
+                              </tr>  
+                              <tr>           
                                 <th>created_by</th>
                                    <td><?php  echo $row['created_by'];?></td>
                                    </tr>
                                    <tr>
-                                <th>is_deleted</th>
-                                   <td><?php  echo $row['is_deleted'];?></td>
+                                      <th>is_deleted</th>
+                                    <td><?php  echo $row['is_deleted'];?></td>
                                    </tr>
-
-                                   
-
-
-    <tr>
-    <th>Status</th>
-    <td> <?php  
-if($row['Status']=="")
-{
-  echo "Not Updated Yet";
-}
-if($row['Status']=="Parked")
-{
-  echo "No empty Slots";
-}
-
-     ;?></td>
-  </tr>
+                  
+           
+                    
 </table>
                                                     </div>
                                                     
@@ -162,37 +135,30 @@ if($row['Status']=="Parked")
                                                 </table>
 <table class="table mb-0">
 
-<?php if($row['Status']==""){ ?>
+<?php if($row['town_name']==""){ ?>
 
 
 <form name="submit" method="post" enctype="multipart/form-data"> 
 
 <tr>
-<th>StreetID </th>
+<th>TownId </th>
 <td>
-  <input type="text" name="street_id" id="street_id" class="form-control wd-450" >
+  <input type="text" name="town_name" id="town_name" class="form-control wd-450" >
+</td>
+</tr>
+<tr>
+<th>Created_by</th>
+<td>
+  <input type="text" name="created_by" id="created_by" class="form-control wd-450" >
+</td>
+</tr>
+<tr>
+<th>is_deleted</th>
+<td>
+  <input type="text" name="is_deleted" id="is_deleted" class="form-control wd-450" >
 </td>
 </tr>
 
-<tr>
-<th>SlotName </th>
-<td>
-  <input type="text" name="slot_name" id="slot_name" class="form-control wd-450" >
-</td></tr>
-
-<tr>
-<th>Fees </th>
-<td>
-  <input type="text" name="fees" id="fees" class="form-control wd-450" >
-</td></tr>
-
-  <tr>
-    <th>Status :</th>
-    <td>
-   <select name="status" class="form-control wd-450" required="true" >
-     <option value="Out">Check Out</option>
-   </select></td>
-  </tr>
 
   <tr align="center">
     <td colspan="2"><button type="submit" name="submit" class="btn btn-primary btn-sm"><i class="fa fa-dot-circle-o"></i> Update</button></td>
@@ -200,34 +166,12 @@ if($row['Status']=="Parked")
   </form>
 <?php } else { ?>
     <table border="1" class="table table-bordered mg-b-0">
-  <tr>
-    <th>street_id</th>
-    <td><?php echo $row['street_id']; ?></td>
-  </tr>
 <tr>
-   <tr>
-    <th>slot_name</th>
-    <td><?php echo $row['slot_name']; ?></td>
-  </tr>
-
-  
- <tr>
-    <th>status</th>
-    <td><?php echo $row['status']; ?></td>
-  </tr>
-
-  <tr>
-<th>created_by</th>
-<td><?php echo $row['created_by']; ?>  </td></tr>
-
+<th>Created Date</th>
+<td><?php echo $row['created_date']; ?>  </td></tr>
 <tr>
-<th>Modified date</th>
+<th>Modified Date</th>
 <td><?php echo $row['modified_date']; ?>  </td></tr>
-
-<tr>
-<th>is_deleted</th>
-<td><?php echo $row['is_deleted']; ?>  </td></tr>
-
 <?php } ?>
 </table>
 
