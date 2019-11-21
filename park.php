@@ -88,7 +88,7 @@ while ($row=mysqli_fetch_array($ret)) {
                   <td><?php  echo $row['created_by'];?></td>
                   <td><?php  echo $row['is_delted'];?></td>
                  
-                  <td ><a href="view-parking-detail.php?upid=<?php echo $row['id'];?>">Update</a>
+                  <td ><a href="view-park-detail.php?upid=<?php echo $row['id'];?>">Update</a>
                 </tr>
                 <?php 
 $cnt=$cnt+1;
