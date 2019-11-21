@@ -85,7 +85,7 @@ if (strlen($_SESSION['id']==0)) {
 
     <div id="right-panel" class="right-panel">
 
-        <?php include_once('../header.php');?>
+        <?php include_once('header.php');?>
         <!-- Header-->
 
         <div class="breadcrumbs">
@@ -126,9 +126,10 @@ if (strlen($_SESSION['id']==0)) {
                                 </div>
                             </div>
                         </div>
-                        <?php $query=mysqli_query($con,"SELECT * FROM  parking_slot");
-$slotcounts=mysqli_num_rows($query);
-?>
+                        <?php 
+                            $query=mysqli_query($con,"SELECT * FROM  parking_slot ");
+                            $slotcounts=mysqli_num_rows($query);
+                        ?>
                         <h4 class="mb-0">
                             <span class="count"><?php echo $slotcounts;?></span>
                         </h4>

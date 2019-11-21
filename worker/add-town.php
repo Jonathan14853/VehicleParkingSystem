@@ -8,21 +8,21 @@ if (strlen($_SESSION['id']==0)) {
     if(isset($_POST['submit']))
   {
 
-$id=$_SESSION['id'];
- $town_name=$_POST['town_name'];
-$created_by=$_POST['created_by'];
-$is_deleted = $_POST['is_deleted'];
+    $id=$_SESSION['id'];
+    $town_name=$_POST['town_name'];
+    $created_by=$_POST['created_by'];
+    $is_deleted = $_POST['is_deleted'];
 
- $query=mysqli_query($con,"insert into town(town_name,created_by) value('$town_name','$created_by','$is_deleted");
+    $query=mysqli_query($con,"INSERT INTO town(town_name,created_by,is_deleted) VALUES('$town_name','$created_by','$is_deleted'");
 
     if ($query) {
-echo '<script>alert("Slot Detail has been added.")</script>';
-echo "<script>window.location.href ='add-town.php'</script>";
+        echo '<script>alert("Town Detail has been added.")</script>';
+        echo "<script>window.location.href ='add-town.php'</script>";
 
-  }
-  else
-    {
- echo '<script>alert("Something Went Wrong. Please try again.")</script>';       
+    }
+    else
+        {
+         echo '<script>alert("Something Went Wrong. Please try again.")</script>';       
     }
 
   
@@ -64,13 +64,13 @@ echo "<script>window.location.href ='add-town.php'</script>";
     <div id="right-panel" class="right-panel">
 
         <!-- Header-->
-        <?php include_once('../header.php');?>
+        <?php include_once('header.php');?>
 
         <div class="breadcrumbs">
             <div class="col-sm-4">
                 <div class="page-header float-left">
                     <div class="page-title">
-                        <h1>Town_detail Detail</h1>
+                        <h1>Town Detail</h1>
                     </div>
                 </div>
             </div>
@@ -102,24 +102,29 @@ echo "<script>window.location.href ='add-town.php'</script>";
                         <div class="card">
                             <div class="card-header"><strong>Town</strong><small> Details</small></div>
                             <form name="computer" method="post" action="">
-                                <p style="font-size:16px; color:red" align="center"> <?php if($msg){
-    echo $msg;
-  }  ?> </p>
+                                <p style="font-size:16px; color:red" align="center">
+                                <?php 
+                                /*
+                                 if($msg) {
+                                    echo $msg;
+                                  }  */
+                                ?> 
+                              </p>
                             <div class="card-body card-block">
  
                                 <div class="form-group">
                                     <label for="company" class=" form-control-label">Town Name</label>
-                                    7<input type="text" name="town_name" value="" class="form-control" id="town_name" required="true">
+                                    <input type="text" name="town_name" value="" class="form-control" id="town_name" required="true">
                                 </div>
                                                                           
-                                        <div class="form-group">
-                                            <label for="street" class=" form-control-label">CreatedBy</label>
-                                            <input type="text" name="created_by" value="" id="created_by" class="form-control" required="true">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="street" class=" form-control-label">ISDeleted</label>
-                                            <input type="text" name="is_deleted" value="" id="is_deleted" class="form-control" required="true">
-                                        </div>
+                                <div class="form-group">
+                                    <label for="street" class=" form-control-label">CreatedBy</label>
+                                    <input type="text" name="created_by" value="" id="created_by" class="form-control" required="true">
+                                </div>
+                                <div class="form-group">
+                                    <label for="street" class=" form-control-label">ISDeleted</label>
+                                    <input type="text" name="is_deleted" value="" id="is_deleted" class="form-control" required="true">
+                                </div>
                                             <!--div class="row form-group">
                                                 <div class="col-12">
 

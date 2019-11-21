@@ -66,7 +66,7 @@ echo "<script>window.location.href ='manage-old-town.php'</script>";
             <div class="col-sm-4">
                 <div class="page-header float-left">
                     <div class="page-title">
-                        <h1>View Users</h1>
+                        <h1>View Towns</h1>
                     </div>
                 </div>
             </div>
@@ -98,12 +98,16 @@ echo "<script>window.location.href ='manage-old-town.php'</script>";
                         <div class="card">
                             <div class="card-header"><strong>View</strong><small> Towns</small></div>
                            
-                                <p style="font-size:16px; color:red" align="center"> <?php if($msg){
-    echo $msg;
-  }  ?> </p>
+                                <p style="font-size:16px; color:red" align="center"> 
+                                  <?php 
+                                    if($msg){
+                                      echo $msg;
+                                    }  
+                                  ?> 
+                                </p>
                             <div class="card-body card-block">
  <?php
-$ret=mysqli_query($con,"select * from town where town_name = '$town_name' and created_by='$created_by' and is_deleted='$is_deletd'");
+$ret=mysqli_query($con,"SELECT * FROM town WHERE town_name = '$town_name' AND created_by='$created_by' AND is_deleted='$is_deleted'");
 $cnt=1;
 while ($row=mysqli_fetch_array($ret)) {
 
@@ -175,7 +179,8 @@ if($row['created_by']=="")
 
   <tr align="center">
     <td colspan="2"><button type="submit" name="submit" class="btn btn-primary btn-sm">
-      <i class="fa fa-dot-circle-o"></i> Update</button></td>
+      <i class="fa fa-dot-circle-o"></i> Update</button>
+    </td>
   </tr>
   </form>
 <?php } else { ?>

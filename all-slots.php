@@ -49,7 +49,7 @@ if (strlen($_SESSION['id']==0)) {
             <div class="col-sm-4">
                 <div class="page-header float-left">
                     <div class="page-title">
-                        <h1>View Users</h1>
+                        <h1>View Parking Slots</h1>
                     </div>
                 </div>
             </div>
@@ -79,12 +79,13 @@ if (strlen($_SESSION['id']==0)) {
                                     <thead>
                                         <tr>
                                             <tr>
-                  <th>StreetID</th>
-            
-                  <th>SlotName</th>
-                      <th>Status</th>    
-                   <th>Action</th>
-                </tr>
+                                              <th>StreetID</th>
+                                              <th>SlotName</th>
+                                              <th>Status</th>
+                                              <th>created_by</th>
+                                              <th>is_deleted</th>    
+                                              <th>Action</th>
+                                            </tr>
                                         </tr>
                                         </thead>
                                     <?php
@@ -100,7 +101,9 @@ while ($row=mysqli_fetch_array($ret)) {
                   <td><?php  echo $row['StreetID'];?></td>
                   <td><?php  echo $row['SlotName'];?></td>
                   <td><?php  echo $row['Status'];?></td>
-                  <td><a href="view-regnewslots-detail.php?viewid=<?php echo $row['ID'];?>">View Details</a></td>
+                  <td><?php  echo $row['created_by'];?></td>
+                  <td><?php  echo $row['is_deleted'];?></td>
+                  <td><a href="view-regnewslots-detail.php?viewid=<?php echo $row['StreetID'];?>">View Details</a></td>
                 </tr>
                 <?php 
 $cnt=$cnt+1;

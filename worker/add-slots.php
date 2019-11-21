@@ -12,10 +12,9 @@ $id=$_SESSION['id'];
  $street_id=$_POST['street_id'];
 $slot_name=$_POST['slot_name'];
 $status=$_POST['status'];
-$sadd=$_POST['sadd'];
 $street_id=mt_rand(1000, 9999);
 
- $query=mysqli_query($con,"insert into parking_slot(street_id,slot_name,status,sadd) value('$street_id','$slot_name','$status','$sadd'");
+ $query=mysqli_query($con,"INSERT INTO parking_slot(street_id,slot_name,status) VALUES('$street_id','$slot_name','$status'");
 
     if ($query) {
 echo '<script>alert("Slot Detail has been added.")</script>';
@@ -109,15 +108,24 @@ echo "<script>window.location.href ='add-slots.php'</script>";
   }  ?> </p>
                             <div class="card-body card-block">
  
-                                <div class="form-group"><label for="company" class=" form-control-label">Street ID</label><input type="text" name="street_id" value="" class="form-control" id="street_id" required="true"></div>
+                                <div class="form-group">
+                                    <label for="company" class=" form-control-label">Street ID</label>
+                                        <input type="text" name="street_id" value="" class="form-control" id="street_id" required="true">
+                                </div>
                                                                           
-                                        <div class="form-group"><label for="street" class=" form-control-label">Slot Add</label><textarea type="text" name="uadd" value="" id="uadd" class="form-control" required="true"></textarea></div>
+                                        <div class="form-group">
+                                            <label for="street" class=" form-control-label">Slot Name</label>
+                                                <textarea type="text" name="uadd" value="" id="uadd" class="form-control" required="true"></textarea>
+                                        </div>
                                             <div class="row form-group">
                                                 <div class="col-12">
 
                                                     </div>
                                                     <div class="col-12">
-                                                    <div class="form-group"><label for="city" class=" form-control-label">Status</label><input type="text" name="status" id="status" value="" class="form-control" required="true"></div>
+                                                    <div class="form-group">
+                                                        <label for="city" class=" form-control-label">Status</label>
+                                                            <input type="text" name="status" id="status" value="" class="form-control" required="true">
+                                                    </div>
                                                     </div>
                                                     
                                 <?php
