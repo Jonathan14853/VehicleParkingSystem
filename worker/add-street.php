@@ -14,7 +14,7 @@ $id=$_SESSION['id'];
 $created_by=$_POST['created_by'];
 $is_deleted = $_POST['is_deleted'];
 
- $query=mysqli_query($con,"insert into street(town_id,street_name,created_by) value('$town_id', '$street_name','$town_name','$created_by','$is_deleted");
+ $query=mysqli_query($con," INSERT INTO street(town_id,street_name,created_by) VALUES('$town_id', '$street_name','$town_name','$created_by','$is_deleted");
 
     if ($query) {
 echo '<script>alert("Slot Detail has been added.")</script>';
@@ -65,7 +65,7 @@ echo "<script>window.location.href ='add-street.php'</script>";
     <div id="right-panel" class="right-panel">
 
         <!-- Header-->
-        <?php include_once('../header.php');?>
+        <?php include_once('header.php');?>
 
         <div class="breadcrumbs">
             <div class="col-sm-4">
@@ -110,11 +110,11 @@ echo "<script>window.location.href ='add-street.php'</script>";
  
                                 <div class="form-group">
                                     <label for="company" class=" form-control-label">Town ID</label>
-                                    7<input type="text" name="town_id" value="" class="form-control" id="town_id" required="true">
+                                    <input type="text" name="town_id" value="" class="form-control" id="town_id" required="true">
                                 </div>
                                 <div class="form-group">
                                     <label for="company" class=" form-control-label">Street Name</label>
-                                    7<input type="text" name="street_name" value="" class="form-control" id="street_name" required="true">
+                                    <input type="text" name="street_name" value="" class="form-control" id="street_name" required="true">
                                 </div>
 
                                                                           
@@ -138,13 +138,8 @@ echo "<script>window.location.href ='add-street.php'</script>";
                                                     </div-->
                                                     
                                 <?php
-                                /* $query=mysqli_query($con,"select * from  tblcomputers");
-              while($row=mysqli_fetch_array($query))
-              {
-              ?>    
-              <option value="<?php echo $row['ComputerName'];?>"><?php echo $row['ComputerName'];?></option>
-                  <?php } */
-                  ?>  
+
+                                ?>  
                                                     </select></div>
                                                     </div>
                                                     </div>
