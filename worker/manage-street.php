@@ -42,7 +42,7 @@ if (strlen($_SESSION['id']==0)) {
     <div id="right-panel" class="right-panel">
 
         <!-- Header-->
-        <?php include_once('../header.php');?>
+        <?php include_once('header.php');?>
         <div class="breadcrumbs">
             <div class="col-sm-4">
                 <div class="page-header float-left">
@@ -77,7 +77,7 @@ if (strlen($_SESSION['id']==0)) {
                                     <thead>
                                         <tr>
                                             <tr>
-
+                    <th>id</th>
                      <th>town_id</th>
                   <th>street_name</th>
                   <th>created_by</th> 
@@ -87,7 +87,7 @@ if (strlen($_SESSION['id']==0)) {
                                         </tr>
                                         </thead>
                                     <?php
-$ret=mysqli_query($con,"select *from street where is_deleted=''");
+$ret=mysqli_query($con,"select *from street");
 $cnt=1;
 while ($row=mysqli_fetch_array($ret)) {
 
@@ -100,7 +100,7 @@ while ($row=mysqli_fetch_array($ret)) {
                   <td><?php  echo $row['created_by'];?></td>
                   <td><?php  echo $row['is_deleted'];?></td>
                  
-                  <td ><a href="view-street-detail.php?upid=<?php echo $row['ID'];?>">Update</a>
+                  <td ><a href="view-street-detail.php?upid=<?php echo $row['id'];?>">Update</a>
                 </tr>
                 <?php 
 $cnt=$cnt+1;
