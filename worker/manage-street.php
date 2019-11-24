@@ -93,8 +93,9 @@ if (strlen($_SESSION['id']==0)) {
 FROM street a LEFT JOIN town b ON a.town_id=b.id 
 LEFT JOIN worker c ON a.created_by=c.id WHERE a.is_deleted=0';
 $ret=mysqli_query($con,$sql);
+$result= mysqli_fetch_all($ret,MYSQLI_ASSOC);
 $cnt=1;
-while ($row=mysqli_fetch_array($ret)) {
+foreach($result as $row) {
 
 ?>
               
