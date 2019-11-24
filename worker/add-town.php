@@ -13,7 +13,7 @@ if (strlen($_SESSION['id']==0)) {
     $created_by=$_POST['created_by'];
     $is_deleted = $_POST['is_deleted'];
 
-    $query=mysqli_query($con,"INSERT INTO town(town_name,created_by,is_deleted) VALUES('$town_name','$created_by','$is_deleted'");
+    $query=mysqli_query($con,"INSERT INTO town(town_name,created_by,is_deleted) VALUES('$town_name','$created_by','$is_deleted')");
 
     if ($query) {
         echo '<script>alert("Town Detail has been added.")</script>';
