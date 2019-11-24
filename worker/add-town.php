@@ -10,10 +10,8 @@ if (strlen($_SESSION['id']==0)) {
 
     $id=$_SESSION['id'];
     $town_name=$_POST['town_name'];
-    $created_by=$_POST['created_by'];
-    $is_deleted = $_POST['is_deleted'];
-
-    $query=mysqli_query($con,"INSERT INTO town(town_name,created_by,is_deleted) VALUES('$town_name','$created_by','$is_deleted')");
+    $sql="INSERT INTO town(town_name,created_by) VALUES('$town_name',$id)";
+    $query=mysqli_query($con,$sql);
 
     if ($query) {
         echo '<script>alert("Town Detail has been added.")</script>';
@@ -116,15 +114,7 @@ if (strlen($_SESSION['id']==0)) {
                                     <label for="company" class=" form-control-label">Town Name</label>
                                     <input type="text" name="town_name" value="" class="form-control" id="town_name" required="true">
                                 </div>
-                                                                          
-                                <div class="form-group">
-                                    <label for="street" class=" form-control-label">CreatedBy</label>
-                                    <input type="text" name="created_by" value="" id="created_by" class="form-control" required="true">
-                                </div>
-                                <div class="form-group">
-                                    <label for="street" class=" form-control-label">ISDeleted</label>
-                                    <input type="text" name="is_deleted" value="" id="is_deleted" class="form-control" required="true">
-                                </div>
+                                
                                             <!--div class="row form-group">
                                                 <div class="col-12">
 
