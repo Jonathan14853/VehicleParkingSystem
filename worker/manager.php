@@ -1,7 +1,18 @@
 <?php
 include('library.php');
-$data=  getStreet();
 $title=$_GET['title'];
+switch ($title) {
+    case 'town':
+        $data= getTown();
+        break;
+    case 'street':
+        $data= getStreet();
+        break;
+    default:
+        $title="street";
+        $data= getStreet();
+        break;
+}
   ?>
 <!doctype html>
 <html class="no-js" lang="en">
