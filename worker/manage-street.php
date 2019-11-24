@@ -80,16 +80,13 @@ if (strlen($_SESSION['id']==0)) {
                                 <table class="table">
                                     <thead>
                                         <tr>
-                                            <tr>
-                    <th>#</th>
-                    <th>street_id</th>
-                     <th>town_id</th>
-                  <th>town_name</th>
-                  <th>street_name</th>
-                  <th>worker_name</th>
-                  <th>created_date</th> 
-                 <th>Action</th>
-                </tr>
+                                            <th>#</th>
+                                            <?php
+                                              foreach ($streets[0] as $key => $value) {
+                                                  ?><th><?=$key;?></th><?php
+                                              }
+                                            ?>
+                                                  <th>Action</th>
                                         </tr>
                                         </thead>
                                     <?php
