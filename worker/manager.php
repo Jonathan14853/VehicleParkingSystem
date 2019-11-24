@@ -8,6 +8,9 @@ switch ($title) {
     case 'street':
         $data= getStreet();
         break;
+    case 'slot':
+        $data= getParkingSlot();
+        break;
     default:
         $title="street";
         $data= getStreet();

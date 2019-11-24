@@ -50,8 +50,8 @@ $row=mysqli_fetch_array($ret);
  <li class="menu-item-has-children dropdown">
                         <a href="add-users.php" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-car"></i>Slots</a>
                         <ul class="sub-menu children dropdown-menu">
-                            <li><i class="fa fa-user"></i><a href="add-slots.php">Add Slot</a></li>
-                            <li><i class="fa fa-user"></i><a href="manage-newslots.php">Manage New Slots</a>
+                            <li><i class="fa fa-user"></i><a href="add-slot.php">Add Slot</a></li>
+                            <li><i class="fa fa-user"></i><a href="manager.php?title=slot">Manage Slots</a>
                             </li>
                             <li><i class="fa fa-user"></i><a href="../manage-oldslots.php">View  Slots</a>
                             </li>

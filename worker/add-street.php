@@ -111,7 +111,7 @@ echo "<script>window.location.href ='add-street.php'</script>";
  
                                 <div class="form-group">
                                     <label for="company" class=" form-control-label">Town ID</label>
-                                    <select name="town_id">
+                                    <select name="town_id" class="form-control">
                                        <?php
                                        while($row=  mysqli_fetch_assoc($town_res))
                                        {

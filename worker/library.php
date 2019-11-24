@@ -11,7 +11,7 @@ function getCon()
 function queryAll($sql)
 {
     $con=getCon();
-    $result=mysqli_fetch_all(mysqli_query($con, $sql),MYSQLI_ASSOC);
+    $result=mysqli_fetch_all(runQuery($con, $sql),MYSQLI_ASSOC);
     mysqli_close($con);
     return $result;
 }
@@ -28,4 +28,24 @@ function getTown()
 (CASE WHEN a.is_deleted=0 THEN "Active" WHEN a.is_deleted=1 THEN "Inactive" END) AS town_status FROM town a
 LEFT JOIN worker b ON a.created_by=b.id';
         return  queryAll($sql);
+}
+function runQuery($con,$sql)
+{
+    return mysqli_query($con, $sql);
+}
+function insertSlot($street_id,$slot_name,$worker)
+{
+    $con=getCon();
+    $sql="INSERT INTO parking_slot(street_id,slot_name,created_by) VALUES($street_id,'$slot_name',$worker)";
+    $result=runQuery($con, $sql);
+    mysqli_close($con);
+    return $result;
+}
+function getParkingSlot()
+{
+    $sql='SELECT a.id AS slot_id,a.slot_name,a.street_id,b.street_name,b.town_id,c.town_name,a.created_by AS worker_id,CONCAT(d.first_name," ",d.last_name) AS worker_name 
+FROM parking_slot a LEFT JOIN street b ON a.street_id=b.id
+LEFT JOIN town c ON b.town_id=c.id 
+LEFT JOIN worker d ON a.created_by=d.id WHERE a.is_deleted=0';
+    return  queryAll($sql);
 }
