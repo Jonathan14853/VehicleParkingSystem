@@ -2,19 +2,20 @@
 session_start();
 error_reporting(0);
 include('../dbconnection.php');
+
+$query="SELECT id,town_name FROM town WHERE is_deleted=0";
+$town_res=  mysqli_query($con, $query);
 if (strlen($_SESSION['id']==0)) {
   header('location:logout.php');
   } else{
     if(isset($_POST['submit']))
   {
-
 $id=$_SESSION['id'];
- $town_id=$_POST['town_id'];
- $street_name=$_POST['street_name'];
-$created_by=$_POST['created_by'];
-$is_deleted = $_POST['is_deleted'];
+$town_id=$_POST['town_id'];
+$street_name=$_POST['street_name'];
 
- $query=mysqli_query($con," INSERT INTO street(town_id,street_name,created_by) VALUES('$town_id', '$street_name','$town_name','$created_by','$is_deleted");
+ $sql="INSERT INTO street(town_id,street_name,created_by) VALUES('$town_id', '$street_name',$id)";
+ $query=mysqli_query($con,$sql);
 
     if ($query) {
 echo '<script>alert("Slot Detail has been added.")</script>';
@@ -110,22 +111,19 @@ echo "<script>window.location.href ='add-street.php'</script>";
  
                                 <div class="form-group">
                                     <label for="company" class=" form-control-label">Town ID</label>
-                                    <input type="text" name="town_id" value="" class="form-control" id="town_id" required="true">
+                                    <select name="town_id">
+                                       <?php
+                                       while($row=  mysqli_fetch_assoc($town_res))
+                                       {
+                                           ?><option value="<?=$row['id'];?>" ><?=$row['town_name'];?></option><?php
+                                       }
+                                       ?>
+                                    </select>
                                 </div>
                                 <div class="form-group">
                                     <label for="company" class=" form-control-label">Street Name</label>
                                     <input type="text" name="street_name" value="" class="form-control" id="street_name" required="true">
                                 </div>
-
-                                                                          
-                                        <div class="form-group">
-                                            <label for="street" class=" form-control-label">CreatedBy</label>
-                                            <input type="text" name="created_by" value="" id="created_by" class="form-control" required="true">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="street" class=" form-control-label">ISDeleted</label>
-                                            <input type="text" name="is_deleted" value="" id="is_deleted" class="form-control" required="true">
-                                        </div>
                                             <!--div class="row form-group">
                                                 <div class="col-12">
 

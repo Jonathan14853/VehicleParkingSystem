@@ -77,29 +77,35 @@ if (strlen($_SESSION['id']==0)) {
                                     <thead>
                                         <tr>
                                             <tr>
-                    <th>id</th>
+                    <th>#</th>
+                    <th>street_id</th>
                      <th>town_id</th>
+                  <th>town_name</th>
                   <th>street_name</th>
-                  <th>created_by</th> 
-                  <th>is_deleted</th>
+                  <th>worker_name</th>
+                  <th>created_date</th> 
                  <th>Action</th>
                 </tr>
                                         </tr>
                                         </thead>
                                     <?php
-$ret=mysqli_query($con,"select *from street");
+                                    $sql='SELECT a.id AS street_id,a.town_id,b.town_name,a.street_name,CONCAT(c.first_name," ",c.last_name) AS worker_name,a.created_date
+FROM street a LEFT JOIN town b ON a.town_id=b.id 
+LEFT JOIN worker c ON a.created_by=c.id WHERE a.is_deleted=0';
+$ret=mysqli_query($con,$sql);
 $cnt=1;
 while ($row=mysqli_fetch_array($ret)) {
 
 ?>
               
                 <tr>
-                  <td><?php echo $cnt;?></td>
-             <td><?php  echo $row['town_id'];?></td>
-             <td><?php  echo $row['town_name'];?></td>
-                  <td><?php  echo $row['created_by'];?></td>
-                  <td><?php  echo $row['is_deleted'];?></td>
-                 
+                  <td><?=$cnt;?></td>
+             <td><?=$row['street_id'];?></td>
+             <td><?=$row['town_id'];?></td>
+             <td><?=$row['town_name'];?></td>
+             <td><?=$row['street_name'];?></td>
+             <td><?=$row['worker_name'];?></td>
+             <td><?=$row['created_date'];?></td>
                   <td ><a href="view-street-detail.php?upid=<?php echo $row['id'];?>">Update</a>
                 </tr>
                 <?php 
