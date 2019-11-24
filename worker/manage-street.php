@@ -1,7 +1,11 @@
 <?php
 session_start();
 error_reporting(0);
-include('../dbconnection.php');
+include('library.php');
+$sql='SELECT a.id AS street_id,a.town_id,b.town_name,a.street_name,CONCAT(c.first_name," ",c.last_name) AS worker_name,a.created_date
+FROM street a LEFT JOIN town b ON a.town_id=b.id 
+LEFT JOIN worker c ON a.created_by=c.id WHERE a.is_deleted=0';
+$streets=  queryAll($sql);
 if (strlen($_SESSION['id']==0)) {
   header('location:logout.php');
   } else{
@@ -89,13 +93,8 @@ if (strlen($_SESSION['id']==0)) {
                                         </tr>
                                         </thead>
                                     <?php
-                                    $sql='SELECT a.id AS street_id,a.town_id,b.town_name,a.street_name,CONCAT(c.first_name," ",c.last_name) AS worker_name,a.created_date
-FROM street a LEFT JOIN town b ON a.town_id=b.id 
-LEFT JOIN worker c ON a.created_by=c.id WHERE a.is_deleted=0';
-$ret=mysqli_query($con,$sql);
-$result= mysqli_fetch_all($ret,MYSQLI_ASSOC);
 $cnt=1;
-foreach($result as $row) {
+foreach($streets as $row) {
 
 ?>
               

@@ -1,7 +1,11 @@
 <?php
 session_start();
 error_reporting(0);
-include('../dbconnection.php');
+include('library.php');
+$sql='SELECT a.id AS town_id,a.town_name,a.created_by AS worker_id,CONCAT(b.first_name," ",b.last_name) AS worker_name,a.created_date,
+(CASE WHEN a.is_deleted=0 THEN "Active" WHEN a.is_deleted=1 THEN "Inactive" END) AS town_status FROM town a
+LEFT JOIN worker b ON a.created_by=b.id';
+$towns=  queryAll($sql);
 if (strlen($_SESSION['id']==0)) {
   header('location:logout.php');
   } else{
@@ -87,15 +91,9 @@ if (strlen($_SESSION['id']==0)) {
                                         </tr>
                                         </thead>
                                     <?php
-                                    $sql='SELECT a.id AS town_id,a.town_name,a.created_by AS worker_id,CONCAT(b.first_name," ",b.last_name) AS worker_name,a.created_date,
-(CASE WHEN a.is_deleted=0 THEN "Active" WHEN a.is_deleted=1 THEN "Inactive" END) AS town_status FROM town a
-LEFT JOIN worker b ON a.created_by=b.id';
-$ret=mysqli_query($con,$sql);
-$cnt=1;
-while ($row=mysqli_fetch_array($ret)) {
+foreach ($towns as $row) {
 
 ?>
-              
                 <tr>
              <td><?php  echo $row['town_id'];?></td>
              <td><?php  echo $row['town_name'];?></td>
@@ -109,7 +107,6 @@ while ($row=mysqli_fetch_array($ret)) {
                   <td ><a href="view-town-detail.php?upid=<?php echo $row['cnt'];?>">Update</a>
                 </tr>
                 <?php 
-$cnt=$cnt+1;
 }?>
 
                                 </table>
