@@ -1,13 +1,12 @@
 <?php
 	session_start();
 
-	include 'dbconnection.php';
+	//include 'dbconnection.php';
 
 
 	if (strlen($_SESSION['id'] == 0)) {
 		header('location:logout.php');
 	}
-
 
 ?>
 <!DOCTYPE html>
@@ -106,50 +105,77 @@ $sdata=$_POST['searchdata'];
                                     <thead>
                                         <tr>
                                             <tr>
-                  <th>id</th>
-                  <th>Street ID</th>
-                <th>Slot Name</th> 
-                <th>status</th>
-                <th>created_by</th>
-                <th>is_deleted</th>   
+                  <th>#</th>
+                  <?php
+                  function queryAll($sql)
+                   {
+                        $con=getCon();
+                        $result=mysqli_fetch_all(runQuery($con, $sql),MYSQLI_ASSOC);
+                        mysqli_close($con);
+                        return $result;
+                   }
+                  function getParkingSlot()
+                  {
+                        $sql='SELECT a.id AS slot_id,a.slot_name,a.street_id,b.street_name,b.town_id,c.town_name,a.created_by AS worker_id,CONCAT(d.first_name," ",d.last_name) AS worker_name 
+                    FROM parking_slot a LEFT JOIN street b ON a.street_id=b.id
+                    LEFT JOIN town c ON b.town_id=c.id 
+                    LEFT JOIN worker d ON a.created_by=d.id WHERE a.is_deleted=0';
+                        return  queryAll($sql);
+                  }
+                  $data = getParkingSlot();
+                    foreach ($data[0] as $key => $value) {
+                    {
+                        $sql='SELECT a.id AS slot_id,a.slot_name,a.street_id,b.street_name,b.town_id,c.town_name,a.created_by AS worker_id,CONCAT(d.first_name," ",d.last_name) AS worker_name 
+                    FROM parking_slot a LEFT JOIN street b ON a.street_id=b.id
+                    LEFT JOIN town c ON b.town_id=c.id 
+                    LEFT JOIN worker d ON a.created_by=d.id WHERE a.is_deleted=0';
+                        return  queryAll($sql);
+                    }
+
+                    foreach ($data[0] as $key => $value) {
+//                       ?><th><?= $key; ?></th><?php
+                    }
+                  ?>
                    <th>Action</th>
                 </tr>
                                         </tr>
                                         </thead>
                                     <?php
-$ret=mysqli_query($con,"select * from parking_slot where street_id like '%$sdata%' || slot_name like  '%$sdata%' || STATUS like  '%$sdata%' || created_by like  '%$sdata%' || is_deleted like  '%$sdata%'");
+$ret=mysqli_query($con,"SELECT * FROM parking_slot WHERE street_id = '$street_id'");
 $num=mysqli_num_rows($ret);
 if($num>0){
 $cnt=1;
-while ($row=mysqli_fetch_array($ret)) {
+$row=mysqli_fetch_array($ret);
+foreach  ($data as $row) {
+} {
     ?>
-              
+            
                 <tr>
-                  <td><?php echo $cnt;?></td>
-                    <td><?php  echo $row['id'];?></td>
-                  <td><?php  echo $row['street_id'];?></td>
-                  <td><?php  echo $row['slot_name'];?></td>
-                  <td><?php  echo $row['status'];?></td>
-                  <td><?php  echo $row['created_by'];?></td>
-                  <td><?php  echo $row['is_deleted'];?></td>
-                  <td><a href="view-slot-detail.php?upid=<?php echo $row['ID'];?>">View Details</a></td>
+                  <td><?= $cnt;?></td>
+                  
+                  <?php
+                    foreach ($data as $value) {
+                        ?><td><?=$value;?></td><?php
+                    }
+                  
+                  ?>
+                  <td><a href="view-slot-detail.php?upid=<?php echo $row['id'];?>">View Details</a></td>
                 </tr>
                  <?php 
 $cnt=$cnt+1;
-} } else { ?>
+}   ?>
+                <?php else { ?>
   <tr>
     <td colspan="8"> No record found against this search</td>
 
   </tr>
    
-<?php } }?>
+<?php } ?>
 
                                 </table>
                             </div>
                         </div>
                     </div>
-
-
 
                 </div>
             </div><!-- .animated -->
@@ -157,17 +183,7 @@ $cnt=$cnt+1;
 
 
     </div><!-- /#right-panel -->
-
-    <!-- Right Panel -->
-
-
-    <script src="vendors/jquery/dist/jquery.min.js"></script>
-    <script src="vendors/popper.js/dist/umd/popper.min.js"></script>
-    <script src="vendors/bootstrap/dist/js/bootstrap.min.js"></script>
-    <script src="assets/js/main.js"></script>
-
+   <?php include 'bottom-link.php'; ?>
 
 </body>
-
 </html>
-<?php/* } */ ?>

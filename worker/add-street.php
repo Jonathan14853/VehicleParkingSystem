@@ -1,35 +1,22 @@
 <?php
-session_start();
-error_reporting(0);
-include('../dbconnection.php');
-
-$query="SELECT id,town_name FROM town WHERE is_deleted=0";
-$town_res=  mysqli_query($con, $query);
-if (strlen($_SESSION['id']==0)) {
-  header('location:logout.php');
-  } else{
-    if(isset($_POST['submit']))
-  {
-$id=$_SESSION['id'];
-$town_id=$_POST['town_id'];
-$street_name=$_POST['street_name'];
-
- $sql="INSERT INTO street(town_id,street_name,created_by) VALUES('$town_id', '$street_name',$id)";
- $query=mysqli_query($con,$sql);
-
-    if ($query) {
-echo '<script>alert("Slot Detail has been added.")</script>';
-echo "<script>window.location.href ='add-street.php'</script>";
-
-  }
-  else
+include 'library.php';
+$town= getTown();
+if(isset($_POST["submit"]))
+{
+    $id=$_SESSION['id'];
+    $town_id = $_POST['town_id'];
+    $street_name = $_POST["street_name"];
+    $result = insertStreet($town_id,$street_name,$id);
+    
+    if($result)
     {
- echo '<script>alert("Something Went Wrong. Please try again.")</script>';       
+        echo "<script>alert('Street Detail has been added')</script>";
     }
-
-  
+    else 
+    {
+        echo "<script>alert('Something went wrong.Please try again!')</script>";
+    }
 }
-
 ?>
 
 <!doctype html>
@@ -113,9 +100,14 @@ echo "<script>window.location.href ='add-street.php'</script>";
                                     <label for="company" class=" form-control-label">Town ID</label>
                                     <select name="town_id" class="form-control">
                                        <?php
-                                       while($row=  mysqli_fetch_assoc($town_res))
+                                       /*while($row=  mysqli_fetch_assoc($town_res))
                                        {
                                            ?><option value="<?=$row['id'];?>" ><?=$row['town_name'];?></option><?php
+                                       }*/
+                                       foreach ($town as $value)
+                                       {
+                                           ?><option value="<?=$value['town_id']?>"><?=$value['town_name'];?></option>
+                                       <?php
                                        }
                                        ?>
                                     </select>
@@ -124,16 +116,6 @@ echo "<script>window.location.href ='add-street.php'</script>";
                                     <label for="company" class=" form-control-label">Street Name</label>
                                     <input type="text" name="street_name" value="" class="form-control" id="street_name" required="true">
                                 </div>
-                                            <!--div class="row form-group">
-                                                <div class="col-12">
-
-                                                    </div>
-                                                    <div class="col-12">
-                                                    <div class="form-group">
-                                                        <label for="city" class=" form-control-label">Status</label>
-                                                        <input type="text" name="status" id="status" value="" class="form-control" required="true">
-                                                    </div>
-                                                    </div-->
                                                     
                                 <?php
 
@@ -176,4 +158,3 @@ echo "<script>window.location.href ='add-street.php'</script>";
                             <script src="../assets/js/main.js"></script>
 </body>
 </html>
-<?php }  ?>

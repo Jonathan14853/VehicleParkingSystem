@@ -15,6 +15,14 @@ function queryAll($sql)
     mysqli_close($con);
     return $result;
 }
+function insertStreet() 
+{
+    $con = getCon();
+    $sql = "INSERT INTO street(town_id,street_name,created_by) VALUES('$town_id','$street_name','$id')";
+    $result = runQuery($con, $sql);
+    mysqli_close($con);
+    return $result;
+}
 function getStreet()
 {
     $sql='SELECT a.id AS street_id,a.town_id,b.town_name,a.street_name,CONCAT(c.first_name," ",c.last_name) AS worker_name,a.created_date
@@ -22,11 +30,20 @@ function getStreet()
         LEFT JOIN worker c ON a.created_by=c.id WHERE a.is_deleted=0';
         return  queryAll($sql);
 }
+function insertTown($town_name,$id) 
+{
+    $con = getCon();
+    $sql = "INSERT INTO town(town_name,created_by) VALUES('$town_name','$id')";
+    $result = runQuery($con, $sql);
+    mysqli_close($con);
+    return $result;
+}
 function getTown()
 {
     $sql='SELECT a.id AS town_id,a.town_name,a.created_by AS worker_id,CONCAT(b.first_name," ",b.last_name) AS worker_name,a.created_date,
 (CASE WHEN a.is_deleted=0 THEN "Active" WHEN a.is_deleted=1 THEN "Inactive" END) AS town_status FROM town a
 LEFT JOIN worker b ON a.created_by=b.id';
+    
         return  queryAll($sql);
 }
 function runQuery($con,$sql)

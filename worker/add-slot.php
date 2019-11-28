@@ -98,11 +98,13 @@ if ($msg) {
                                         <div class="form-group">
                                             <label for="company" class=" form-control-label">Street ID</label>
                                             <select name="street_id" class="form-control">
-<?php
-foreach ($streets as $value) {
-    ?><option value="<?= $value['street_id']; ?>"><?= $value['street_name']; ?></option><?php
-}
-?>
+                                            <?php
+                                            foreach ($streets as $value) {
+                                            ?>
+                                            <option value="<?= $value['street_id']; ?>"><?= $value['street_name']; ?></option>
+                                            <?php
+                                            }
+                                            ?>
                                             </select>
                                         </div>
 

@@ -1,30 +1,16 @@
 <?php
-session_start();
-error_reporting(0);
-include('../dbconnection.php');
-if (strlen($_SESSION['id']==0)) {
-  header('location:logout.php');
-  } else{
-    if(isset($_POST['submit']))
-  {
-
-    $id=$_SESSION['id'];
-    $town_name=$_POST['town_name'];
-    $sql="INSERT INTO town(town_name,created_by) VALUES('$town_name',$id)";
-    $query=mysqli_query($con,$sql);
-
-    if ($query) {
-        echo '<script>alert("Town Detail has been added.")</script>';
-        echo "<script>window.location.href ='add-town.php'</script>";
-
+include 'library.php';
+$town = getTown();
+if(isset($_POST["submit"])) {
+    $id = $_SESSION["id"];
+    $town_name = $_POST["town_name"];
+    $result = insertTown($town_name,$id);
+    if($result) {
+        echo '<script>alert("Town Detail has been Added!")</script>';
+        echo "<script>window.location.href='add-town.php'</script>";
+    }else {
+        echo '<script>alert("Something Went  Wrong.Please try again.")</script>';
     }
-    else
-        {
-         echo '<script>alert("Something Went Wrong. Please try again.")</script>';       
-    }
-
-  
-}
 
 ?>
 
@@ -112,29 +98,11 @@ if (strlen($_SESSION['id']==0)) {
  
                                 <div class="form-group">
                                     <label for="company" class=" form-control-label">Town Name</label>
+                                    
                                     <input type="text" name="town_name" value="" class="form-control" id="town_name" required="true">
                                 </div>
                                 
-                                            <!--div class="row form-group">
-                                                <div class="col-12">
-
-                                                    </div>
-                                                    <div class="col-12">
-                                                    <div class="form-group">
-                                                        <label for="city" class=" form-control-label">Status</label>
-                                                        <input type="text" name="status" id="status" value="" class="form-control" required="true">
-                                                    </div>
-                                                    </div-->
-                                                    
-                                <?php
-                                /* $query=mysqli_query($con,"select * from  tblcomputers");
-              while($row=mysqli_fetch_array($query))
-              {
-              ?>    
-              <option value="<?php echo $row['ComputerName'];?>"><?php echo $row['ComputerName'];?></option>
-                  <?php } */
-                  ?>  
-                                                    </select></div>
+                    
                                                     </div>
                                                     </div>
                                                 
@@ -172,4 +140,3 @@ if (strlen($_SESSION['id']==0)) {
                             <script src="../assets/js/main.js"></script>
 </body>
 </html>
-<?php }  ?>
