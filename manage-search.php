@@ -126,6 +126,7 @@ $sdata=$_POST['searchdata'];
                                     <?php
 
 $cnt=1;
+$ret=mysqli_query($con,$sql);
 $row=mysqli_fetch_array($ret);
 foreach ($data as $row){
 } {

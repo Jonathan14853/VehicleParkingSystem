@@ -31,7 +31,7 @@ $user_name=$row['user_name'];
                     </li>
 
 <li class="active">
-                        <a href="search_slot.php"> <i class="menu-icon fa fa-search"></i>Search Slot </a>
+    <a href="manage-search.php?title=slot"> <i class="menu-icon fa fa-search"></i>Search Slot </a>
                     </li>
 
 
@@ -39,12 +39,8 @@ $user_name=$row['user_name'];
  <li class="menu-item-has-children dropdown">
                         <a href="add-slots.php" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-car"></i>Parking Slots</a>
                         <ul class="sub-menu children dropdown-menu">
-                            <li><i class="fa fa-user"></i><a href="manage-oldslots.php">View Old Slots</a>
+                            <li><i class="fa fa-user"></i><a href="manager.php?title=slot">View Slots</a>
                             </li>
-                            <!--<li><i class="fa fa-user"></i><a href="add-slots.php">Add Slots</a></li>
-                            <li><i class="fa fa-user"></i><a href="manage-newusers.php">Manage New Slots</a>
-                            </li>-->
-                            
                           
                         </ul>
                     </li>
@@ -73,6 +69,6 @@ $user_name=$row['user_name'];
                     </li>
 
                 </ul>
-            </div><!-- /.navbar-collapse -->
+            </div>
         </nav>
     </aside>

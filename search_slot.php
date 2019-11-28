@@ -164,7 +164,7 @@ foreach  ($data as $row) {
                  <?php 
 $cnt=$cnt+1;
 }   ?>
-                <?php else { ?>
+                <?php ?>
   <tr>
     <td colspan="8"> No record found against this search</td>
 

@@ -100,10 +100,6 @@ if(isset($_POST["submit"]))
                                     <label for="company" class=" form-control-label">Town ID</label>
                                     <select name="town_id" class="form-control">
                                        <?php
-                                       /*while($row=  mysqli_fetch_assoc($town_res))
-                                       {
-                                           ?><option value="<?=$row['id'];?>" ><?=$row['town_name'];?></option><?php
-                                       }*/
                                        foreach ($town as $value)
                                        {
                                            ?><option value="<?=$value['town_id']?>"><?=$value['town_name'];?></option>
