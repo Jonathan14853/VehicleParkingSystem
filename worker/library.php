@@ -58,6 +58,13 @@ function insertSlot($street_id,$slot_name,$worker)
     mysqli_close($con);
     return $result;
 }
+function selectSlot() {
+    $con = getCo();
+    $sql = "SELECT * FROM parking_slot WHERE is_deleted=0";
+    $result = runQuery($con, $sql);
+    mysqli_close($con);
+    return $result;
+}
 function getParkingSlot()
 {
     $sql='SELECT a.id AS slot_id,a.slot_name,a.street_id,b.street_name,b.town_id,c.town_name,a.created_by AS worker_id,CONCAT(d.first_name," ",d.last_name) AS worker_name 

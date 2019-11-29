@@ -1,18 +1,15 @@
 <?php
-session_start();
-error_reporting(0);
-include('../dbconnection.php');
-if (strlen($_SESSION['id']==0)) {
-  header('location:logout.php');
-  } else{
+include 'library.php';
+$slot = getParkingSlot();
    if(isset($_POST['submit']))
   {
     
-      $town_name=$_POST['town_name'];
+      $street_id=$_POST['street_id'];
+      $slot_name = $_POST['slot_name'];
       $created_by=$_POST['created_by'];
     
-   $query=mysqli_query($con, "UPDATE town SET town_name='$town_name',created_by='$created_by'");
-    if ($query) {
+   $result = selectSlot();
+    if ($result) {
 echo '<script>alert("Details updated")</script>';
 echo "<script>window.location.href ='manage-old-town.php'</script>";
   }
@@ -90,24 +87,19 @@ echo "<script>window.location.href ='manage-old-town.php'</script>";
                                 </p>
                             <div class="card-body card-block">
  <?php
-$ret=mysqli_query($con,"SELECT * FROM town WHERE town_name = '$town_name' AND created_by='$created_by' AND is_deleted=0");
 $cnt=1;
-while ($row=mysqli_fetch_array($ret)) {
+foreach ($data as $row){
 
 ?>                       <table border="1" class="table table-bordered mg-b-0">
    
-                                  <tr>
-                                  <th>StreetID</th>
-                                   <td><?php  echo $row['town_name'];?></td>
-                                  </tr> 
+    <tr>
+        <td><?=$cnt;?></td>
+        <?php foreach ($row as $value) {
+            ?><td><?=$value;?></td><?php
+                    }
+                    ?>
+    </tr>
 
-                                  <tr>
-                                <th>SlotName</th>
-                                   <td><?php  echo $row['created_by'];?></td>
-                                   </tr>
-                                    
-                  
-           
 <?php  
 if($row['created_by']=="")
 {
@@ -117,20 +109,13 @@ if($row['created_by']=="")
      ;?></td>
   </tr>
 </table>
+                                <?php $cnt = $cnt + 1; ?>
                                                     </div>
                                                     
-                                                    
-                                                    
-                                                    
-                                                </div>
-                                                </table>
 <table class="table mb-0">
 
 <?php if($row['town_name']==""){ ?>
-
-
 <form name="submit" method="post" enctype="multipart/form-data"> 
-
 
 <tr>
 <th>Town Name </th>
@@ -146,7 +131,6 @@ if($row['created_by']=="")
 </td>
 </tr>
 
- 
 
   <tr align="center">
     <td colspan="2"><button type="submit" name="submit" class="btn btn-primary btn-sm">
@@ -158,30 +142,16 @@ if($row['created_by']=="")
     <table border="1" class="table table-bordered mg-b-0">
   <tr>
     <th>TownName</th>
-    <td><?php echo $row['town_name']; ?></td>
-  </tr>
-
-  
- <tr>
-    <th></th>
-    <td><?php echo $row['created_by']; ?></td>
+    <td><?php echo $row['TownName']; ?></td>
   </tr>
 
 <?php } ?>
 </table>
 
-
-  
-
-  
-
 <?php } ?>
 
                                             </div>
 
-
-
-                                           
                                             </div>
                                         </div><!-- .animated -->
                                     </div><!-- .content -->
@@ -190,4 +160,3 @@ if($row['created_by']=="")
 <?php include 'bottom-links.php';?>
 </body>
 </html>
-<?php }  ?>

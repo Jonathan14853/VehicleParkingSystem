@@ -1,14 +1,9 @@
 <?php
-session_start();
-error_reporting(0);
-include('dbconnection.php');
-if (strlen($_SESSION['id']==0)) {
-  header('location:logout.php');
-  } else{
+include 'library.php';
+$street = getStreet();
    if(isset($_POST['submit']))
   {
-    
-    #$cid=$_GET['upid'];
+       $id = $_SESSION['id'];
       $town_id=$_POST['town_id'];
       $street_name=$_POST['street_name'];
       $created_by=$_POST['created_by'];
@@ -34,26 +29,9 @@ echo "<script>window.location.href ='manage-old-street.php'</script>";
 <!doctype html>
 <html class="no-js" lang="en">
 
-<head>
-    
+<head> 
     <title>New Streets</title>
-    
-
-    <link rel="apple-touch-icon" href="apple-icon.png">
-  
-
-    <link rel="stylesheet" href="../vendors/bootstrap/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../vendors/font-awesome/css/font-awesome.min.css">
-    <link rel="stylesheet" href="../vendors/themify-icons/css/themify-icons.css">
-    <link rel="stylesheet" href="../vendors/flag-icon-css/css/flag-icon.min.css">
-    <link rel="stylesheet" href="../vendors/selectFX/css/cs-skin-elastic.css">
-
-    <link rel="stylesheet" href="../assets/css/style.css">
-
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
-
-
-
+    <?php    include 'header-links.php'; ?>
 </head>
 
 <body>
@@ -110,60 +88,36 @@ echo "<script>window.location.href ='manage-old-street.php'</script>";
  #$cid=$_GET['upid'];
 $ret=mysqli_query($con,"select * from street where town_id='$town_id'");
 $cnt=1;
-while ($row=mysqli_fetch_array($ret)) {
-
+$row=mysqli_fetch_array($ret); 
+foreach ($data as $row){
 ?>                       <table border="1" class="table table-bordered mg-b-0">
    
                                 <tr>
-                                  <th>TownName</th>
-                                  <th>StreetName</th>
-                                  <th>created_by</th>
-                                  <th>is_deleted</th>
-
-                                    <td><?php  echo $row['town_id'];?></td>
-                                   </tr>                             
-                                <tr>
-                                    <th>StreetName</th>
-                                      <td><?php  echo $row['street_name'];?></td>
-                                   </tr>
-                                   <tr>
-                                    <th>created_by</th>
-                                      <td><?php  echo $row['created_by'];?></td>
-                                   </tr>
-                                   <tr>
-                                    <th>is_delted</th>
-                                      <td><?php  echo $row['is_deleted'];?></td>
-                                   </tr>
-                                 
-
+                                    <td><?=$cnt;?></td>
+                                    <?php
+                                                                                                foreach($row as $value) {
+                                                                                                    ?><td><?=$value;?></td><?php
+                                                                                              }
+                                                                                                ?>
+                                </tr>
                   
          <?php  
 if($row['town_name']=="")
 {
   echo "Not Updated Yet";
 }
-/*if($row['Status']=="Out")
-{
-  echo "Check Out";
-}*/
+
 
      ;?>
    </td>
   </tr>
 </table>
-          </div>
-                                                    
-                                                    
-                                                    
-                                                    
-                                              
+          </div>                           
         </div>
         </table>
 <table class="table mb-0">
 
 <?php if($row['town_id']==""){ ?>
-
-
 <form name="submit" method="post" enctype="multipart/form-data"> 
 
 <tr>
@@ -188,60 +142,21 @@ if($row['town_name']=="")
     <td colspan="2"><button type="submit" name="submit" class="btn btn-primary btn-sm"><i class="fa fa-dot-circle-o"></i> Update</button></td>
   </tr>
   </form>
-<?php } ?> <?php /*else {  ?>
-    <table border="1" class="table table-bordered mg-b-0">
-<tr>
-    <th>Town Id</th>
-    <td><?php echo $row['town_id']; ?></td>
-  </tr>
-<tr>
-
-  <tr>
-    <th>Street Name</th>
-    <td><?php echo $row['street_name']; ?></td>
-  </tr>
-<tr>
-   <tr>
-    <th>created_by</th>
-    <td><?php echo $row['created_by']; ?></td>
-  </tr>
-
-  
- <tr>
-    <th>is_deleted</th>
-    <td><?php echo $row['is_deleted']; ?></td>
-  </tr>
-
-  <tr>
-<th>Created Date</th>
-<td><?php echo $row['created_date']; ?>  </td></tr>
-
-<tr>
-<th>Modified Date</th>
-<td><?php echo $row['modified_date']; ?>  </td></tr>
-</table>
-<?php } */?>
-
+<?php } else {
+     foreach ($row as $value){
+         ?><td><?=$value;?></td><?php
+     }
+}
+    
+?>
 
                                             </div>
 
-
-
-                                           
                                             </div>
                                         </div><!-- .animated -->
                                     </div><!-- .content -->
                                 </div><!-- /#right-panel -->
-                                <!-- Right Panel -->
-
-
-                            <script src="../vendors/jquery/dist/jquery.min.js"></script>
-                            <script src="../vendors/popper.js/dist/umd/popper.min.js"></script>
-
-                            <script src="../vendors/jquery-validation/dist/jquery.validate.min.js"></script>
-                            <script src="../vendors/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.min.js"></script>
-
-                            <script src="../vendors/bootstrap/dist/js/bootstrap.min.js"></script>
-                            <script src="../assets/js/main.js"></script>
+<?php include 'bottom-links.php'; ?>
 </body>
 </html>
+<?php } ?>

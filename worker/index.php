@@ -10,7 +10,7 @@ if(isset($_POST['signup']))
 	$enc_password=$_POST['password'];
 	//$hash = password_hash($enc_password,PASSWORD_DEFAULT);
 	$hash = md5($enc_password);
-	$msg=mysqli_query($con,"insert into worker(username,first_name,last_name,password) values('$user_name','$first_name','$last_name','$hash')");
+	$msg=mysqli_query($con,"INSERT INTO worker(username,first_name,last_name,password) VALUES('$user_name','$first_name','$last_name','$hash')");
 if($msg)
 {
 	echo "<script>alert('Register successfully');</script>";
