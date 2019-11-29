@@ -1,42 +1,49 @@
 <?php
-	session_start();
-
-	include 'dbconnection.php';
-
-	$user = $_SESSION['login'];
-	$ret=mysqli_query($con,"select  username from customer where username='$user'");
-	$row=mysqli_fetch_array($ret);
+include 'customer-library.php';
+$payment= getPayment();
+if(isset($_POST["submit"]))
+{
+    $reference_code=$_SESSION['id'];
+    //$reference_code = $_POST['reference_code'];
+    $amount= $_POST['amount'];
+    $transaction_number = $_POST["transaction_number"];
+    $result = insertPayment($amount,$transaction_number,$reference_code);
+    
+    if($result)
+    {
+        echo "<script>alert('Payment Detail has been added')</script>";
+    }
+    else 
+    {
+        echo "<script>alert('Something went wrong.Please try again!')</script>";
+    }
+}
 ?>
-<!DOCTYPE html>
-<html>
+
+<!doctype html>
+<html class="no-js" lang="en">
+
 <head>
-	<title>Customer Payment</title>
-	
-	<link rel="stylesheet" href="vendors/bootstrap/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="vendors/font-awesome/css/font-awesome.min.css">
-    <link rel="stylesheet" href="vendors/themify-icons/css/themify-icons.css">
-    <link rel="stylesheet" href="vendors/flag-icon-css/css/flag-icon.min.css">
-    <link rel="stylesheet" href="vendors/selectFX/css/cs-skin-elastic.css">
-
-    <link rel="stylesheet" href="assets/css/style.css">
-
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
-
+    
+    <title>Payment Details</title>
+    <?php include 'header-links.php'; ?>
 </head>
-<body>
-	<?php
-	include_once('customer_sidebar.php');
-	?>
 
-	<div id="right-panel" class="right-panel">
+<body>
+    <!-- Left Panel -->
+
+    <?php include_once('customer_sidebar.php');?>
+
+    <div id="right-panel" class="right-panel">
 
         <!-- Header-->
         <?php include_once('header.php');?>
+
         <div class="breadcrumbs">
             <div class="col-sm-4">
                 <div class="page-header float-left">
                     <div class="page-title">
-                        <h1>Make Payment</h1>
+                        <h1>Payment Details</h1>
                     </div>
                 </div>
             </div>
@@ -45,7 +52,7 @@
                     <div class="page-title">
                         <ol class="breadcrumb text-right">
                             <li><a href="make-payment.php">Dashboard</a></li>
-                            <li><a href="make-payment.php">Make Payment</a></li>
+                            <li><a href="make-payment.php">Payment Detail</a></li>
                             <li class="active">Payment</li>
                         </ol>
                     </div>
@@ -55,68 +62,62 @@
 
         <div class="content mt-3">
             <div class="animated fadeIn">
+
+
                 <div class="row">
+                    <div class="col-lg-6">
+                       <!-- .card -->
+
+                    </div>
+                    <!--/.col-->
+
                     <div class="col-lg-12">
                         <div class="card">
-                            <div class="card-header">
-                                <strong class="card-title">Latest Payment</strong>
-                            </div>
-                            <div class="card-body">
-                                <table class="table">
-                                    <thead>
-                                        <tr>
-                                            <tr>
-                                                <th>id</th>
-                                                  <th>ReferenceCode</th>
-                                                  <th>TransactionNumber</th> 
-                                                  <th>Amount</th>
-                                                  <th>Created_By</th>
-                                                  <th>Is_Deleted</th>
-                                                 <th>Action</th>
-                            </tr>
-                                     </tr>
-                                        </thead>
-                                    <?php
-$ret=mysqli_query($con,"select * from payment");
-$cnt=1;
-while ($row=mysqli_fetch_array($ret)) {
+                            <div class="card-header"><strong>Street</strong><small> Details</small></div>
+                            <form name="computer" method="post" action="">
+                                <p style="font-size:16px; color:red" align="center"> <?php if($msg){
+    echo $msg;
+  }  ?> </p>
+                            <div class="card-body card-block">
+                                <div class="form-group">
+                                    <label for="company" class=" form-control-label">Amount</label>
+                                    <input type="text" name="amount" value="" class="form-control" id="transaction_number" required="true">
+                                </div>
+                                <div class="form-group">
+                                    <label for="company" class=" form-control-label">Transaction Number</label>
+                                    <input type="text" name="transaction_number" value="" class="form-control" id="transaction_number" required="true">
+                                </div>
+                                                    
+                                <?php
 
-?>
-              
-                <tr>
-                  <td><?php echo $cnt;?></td>
-             <td><?php  echo $row['reference_code'];?></td>
-                  <td><?php  echo $row['transaction_number'];?></td>
-                  <td><?php  echo $row['amount'];?></td>
-                  <td><?php  echo $row['created_by'];?></td>
-                  <td><?php  echo $row['is_deleted'];?></td>
-                 
-                  <td ><a href="view-payment-detail.php?upid=<?php echo $row['id'];?>">Update</a>
-                </tr>
-                <?php 
-$cnt=$cnt+1;
-}?>
-
-                                </table>
-                            </div>
-                        </div>
-                    </div>
+                                ?>  
+                                                    </select></div>
+                                                    </div>
+                                                    </div>
+                                                
+                                                    </div>
+                                                    
+                                                    </div>
+                                                    
+                                                     <div class="card-footer">
+                                                       <p style="text-align: center;"><button type="submit" class="btn btn-primary btn-sm" name="submit" id="submit">
+                                                            <i class="fa fa-dot-circle-o"></i>  Pay
+                                                        </button></p>
+                                                        
+                                                    </div>
+                                                </div>
+                                                </form>
+                                            </div>
 
 
 
-                </div>
-            </div><!-- .animated -->
-        </div><!-- .content -->
+                                           
+                                            </div>
+                                        </div><!-- .animated -->
+                                    </div><!-- .content -->
+                                </div><!-- /#right-panel -->
+                                <!-- Right Panel -->
 
-
-    </div><!-- /#right-panel -->
-
-    <!-- Right Panel -->
-
-
-    <script src="vendors/jquery/dist/jquery.min.js"></script>
-    <script src="vendors/popper.js/dist/umd/popper.min.js"></script>
-    <script src="vendors/bootstrap/dist/js/bootstrap.min.js"></script>
-    <script src="assets/js/main.js"></script>
+                                <?php include 'bottom-link.php'; ?>
 </body>
 </html>

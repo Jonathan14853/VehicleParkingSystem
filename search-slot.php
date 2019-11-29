@@ -1,7 +1,7 @@
 <?php
 	session_start();
 
-	//include 'dbconnection.php';
+	include 'dbconnection.php';
 
 
 	if (strlen($_SESSION['id'] == 0)) {
@@ -13,20 +13,7 @@
 <html>
 <head>
 	<title>Parking Slot Search</title>
-
-    <link rel="apple-touch-icon" href="apple-icon.png">
-    <link rel="shortcut icon" href="favicon.ico">
-
-	<link rel="stylesheet" href="vendors/bootstrap/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="vendors/font-awesome/css/font-awesome.min.css">
-    <link rel="stylesheet" href="vendors/themify-icons/css/themify-icons.css">
-    <link rel="stylesheet" href="vendors/flag-icon-css/css/flag-icon.min.css">
-    <link rel="stylesheet" href="vendors/selectFX/css/cs-skin-elastic.css">
-
-    <link rel="stylesheet" href="assets/css/style.css">
-
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
-
+        <?php include 'header-links.php'; ?>
 </head>
 <body>
 <!-- Left Panel -->
@@ -49,8 +36,8 @@
                 <div class="page-header float-right">
                     <div class="page-title">
                         <ol class="breadcrumb text-right">
-                            <li><a href="search_slot.php">Dashboard</a></li>
-                            <li><a href="search_slot.php">Search parking Slots</a></li>
+                            <li><a href="search-slot.php">Dashboard</a></li>
+                            <li><a href="search-slot.php">Search parking Slots</a></li>
                             <li class="active">Slots</li>
                         </ol>
                     </div>
@@ -106,32 +93,7 @@ $sdata=$_POST['searchdata'];
                                         <tr>
                                             <tr>
                   <th>#</th>
-                  <?php
-                  function queryAll($sql)
-                   {
-                        $con=getCon();
-                        $result=mysqli_fetch_all(runQuery($con, $sql),MYSQLI_ASSOC);
-                        mysqli_close($con);
-                        return $result;
-                   }
-                  function getParkingSlot()
-                  {
-                        $sql='SELECT a.id AS slot_id,a.slot_name,a.street_id,b.street_name,b.town_id,c.town_name,a.created_by AS worker_id,CONCAT(d.first_name," ",d.last_name) AS worker_name 
-                    FROM parking_slot a LEFT JOIN street b ON a.street_id=b.id
-                    LEFT JOIN town c ON b.town_id=c.id 
-                    LEFT JOIN worker d ON a.created_by=d.id WHERE a.is_deleted=0';
-                        return  queryAll($sql);
-                  }
-                  $data = getParkingSlot();
-                    foreach ($data[0] as $key => $value) {
-                    {
-                        $sql='SELECT a.id AS slot_id,a.slot_name,a.street_id,b.street_name,b.town_id,c.town_name,a.created_by AS worker_id,CONCAT(d.first_name," ",d.last_name) AS worker_name 
-                    FROM parking_slot a LEFT JOIN street b ON a.street_id=b.id
-                    LEFT JOIN town c ON b.town_id=c.id 
-                    LEFT JOIN worker d ON a.created_by=d.id WHERE a.is_deleted=0';
-                        return  queryAll($sql);
-                    }
-
+<?php
                     foreach ($data[0] as $key => $value) {
 //                       ?><th><?= $key; ?></th><?php
                     }
