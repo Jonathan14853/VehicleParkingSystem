@@ -23,7 +23,7 @@ switch ($title) {
 <html class="no-js" lang="en">
 <head>
     <title><?=$title;?></title>
-<?php include 'header-links.phps'; ?>
+<?php include 'header-links.php'; ?>
 </head>
 <body>
     <!-- Left Panel -->

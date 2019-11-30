@@ -65,6 +65,7 @@ include 'customer-library.php';
                                                         </button></p>
                                                         
                                                     </div>
+                                </div>
                                                     </div> 
                                     
        </form>
@@ -130,7 +131,7 @@ $cnt=$cnt+1;
                             </div>
                         </div>
                     </div>
-
+                    </div>
                 </div>
             </div><!-- .animated -->
         </div><!-- .content -->
