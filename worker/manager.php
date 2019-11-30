@@ -4,6 +4,7 @@ $title=$_GET['title'];
 switch ($title) {
     case 'town':
         $data= getTown();
+        //print_r($data); exit;
         break;
     case 'street':
         $data= getStreet();
@@ -75,8 +76,6 @@ switch ($title) {
     <?php
     $cnt = 1;
     foreach ($data as $row) {
-        
-    } {
         ?>
         <tr>
             <td><?= $cnt; ?></td>

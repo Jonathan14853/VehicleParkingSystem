@@ -2,12 +2,6 @@
         <nav class="navbar navbar-expand-sm navbar-default">
 <?php
 $user=$_SESSION['login'];
-$ret=mysqli_query($con,"select username from worker where username='$user'");
-$row=mysqli_fetch_array($ret);
-/*$user = $row['user'];*/
-/*$first_name = $row['first_name'];*/
-/*$slot_name=$row['SlotName'];*/
-
 ?>
             <div class="navbar-header">
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-menu" aria-controls="main-menu" aria-expanded="false" aria-label="Toggle navigation">
