@@ -33,14 +33,14 @@ function runQuery($con,$sql)
 {
     return mysqli_query($con, $sql);
 }
-/*function getParkingSlot()
+function getParkingSlot()
 {
     $sql='SELECT a.id AS slot_id,a.slot_name,a.street_id,b.street_name,b.town_id,c.town_name,a.created_by AS customer_id,CONCAT(d.first_name," ",d.last_name) AS worker_name 
 FROM parking_slot a LEFT JOIN street b ON a.street_id=b.id
 LEFT JOIN town c ON b.town_id=c.id 
 LEFT JOIN customer d ON a.created_by=d.id WHERE a.is_deleted=0';
     return  queryAll($sql);
-}*/
+}
 function insertPayment() {
     $con = getCon();
 $sql = "INSERT INTO payment(amount,transaction_number,refence_code,created_by) VALUES('$amount','$transaction_number','$reference_code')";

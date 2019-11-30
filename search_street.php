@@ -94,7 +94,7 @@ $sdata=$_POST['searchdata'];
                                     <thead>
                                         <tr>
                                             <tr>
-                  <th>id</th>                          
+                  <th>#</th>                          
                   <th>town_id</th>
                   <th>street_name</th>
                   <th>created_by</th>
@@ -114,11 +114,12 @@ while ($row=mysqli_fetch_array($ret)) {
                 <tr>
                   <td><?= $cnt;?></td>
             
+                  <?php 
+                                                foreach ($row as $key=> $value) {
+                                                    ?><td><?=$value;?></td><?php
+                                                }
+                                                ?>
                   
-                  <td><?php  echo $row['town_id'];?></td>
-                  <td><?php  echo $row['street_name'];?></td>
-                  <td><?php  echo $row['created_by'];?></td>
-                  <td><?php  echo $row['is_deleted'];?></td>
                   <td><a href="view-street-detail.php?upid=<?php echo $row['id'];?>">View Details</a></td>
                 </tr>
                  <?php 

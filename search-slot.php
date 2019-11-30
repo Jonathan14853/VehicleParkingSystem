@@ -1,13 +1,5 @@
 <?php
-	session_start();
-
-	include 'dbconnection.php';
-
-
-	if (strlen($_SESSION['id'] == 0)) {
-		header('location:logout.php');
-	}
-
+include 'customer-library.php';
 ?>
 <!DOCTYPE html>
 <html>
