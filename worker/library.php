@@ -15,10 +15,10 @@ function queryAll($sql)
     mysqli_close($con);
     return $result;
 }
-function insertStreet() 
+function insertStreet($town_id,$street_name,$id) 
 {
     $con = getCon();
-    $sql = "INSERT INTO street(town_id,street_name,created_by) VALUES('$town_id','$street_name','$id')";
+    $sql = "INSERT INTO street(town_id,street_name,created_by) VALUES($town_id,'$street_name',$id)"; 
     $result = runQuery($con, $sql);
     mysqli_close($con);
     return $result;
