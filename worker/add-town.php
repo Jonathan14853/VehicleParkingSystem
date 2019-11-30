@@ -1,18 +1,29 @@
 <?php
-include 'library.php';
-$town = getTown();
+session_start();
+error_reporting(0);
+include('../dbconnection.php');
+if (strlen($_SESSION['id']==0)) {
+  header('location:logout.php');
+  } else{
+    if(isset($_POST['submit']))
+  {
 
-if(isset($_POST["submit"])) {
-    $id = $_SESSION["id"];
-    $town_name = $_POST["town_name"];
-    $result = insertTown($town_name,$id);
-    
-    if($result) {
-        echo "<script>alert('Town Detail has Been Added!')</script>";
-    }else {
-        echo "<script>alert('Something Went wrong!Please try again.')</script>";
+    $id=$_SESSION['id'];
+    $town_name=$_POST['town_name'];
+    $sql="INSERT INTO town(town_name,created_by) VALUES('$town_name',$id)";
+    $query=mysqli_query($con,$sql);
+
+    if ($query) {
+        echo '<script>alert("Town Detail has been added.")</script>';
+        echo "<script>window.location.href ='add-town.php'</script>";
+
     }
-    
+    else
+        {
+         echo '<script>alert("Something Went Wrong. Please try again.")</script>';       
+    }
+
+  
 }
 
 ?>
@@ -23,12 +34,33 @@ if(isset($_POST["submit"])) {
 <head>
     
     <title>Town Details</title>
-    <?php include 'header-links.php'; ?>
-</head>
-<body>
+    
+
+    <link rel="apple-touch-icon" href="apple-icon.png">
   
+
+
+    <link rel="stylesheet" href="../vendors/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../vendors/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../vendors/themify-icons/css/themify-icons.css">
+    <link rel="stylesheet" href="../vendors/flag-icon-css/css/flag-icon.min.css">
+    <link rel="stylesheet" href="../vendors/selectFX/css/cs-skin-elastic.css">
+
+    <link rel="stylesheet" href="../assets/css/style.css">
+
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
+
+
+
+</head>
+
+<body>
+    <!-- Left Panel -->
+
     <?php include_once('sidebar.php');?>
+
     <div id="right-panel" class="right-panel">
+
         <!-- Header-->
         <?php include_once('header.php');?>
 
@@ -36,7 +68,7 @@ if(isset($_POST["submit"])) {
             <div class="col-sm-4">
                 <div class="page-header float-left">
                     <div class="page-title">
-                        <h1>Town Details</h1>
+                        <h1>Town Detail</h1>
                     </div>
                 </div>
             </div>
@@ -45,7 +77,7 @@ if(isset($_POST["submit"])) {
                     <div class="page-title">
                         <ol class="breadcrumb text-right">
                             <li><a href="add-town.php">Dashboard</a></li>
-                            <li><a href="add-town.php">Street Detail</a></li>
+                            <li><a href="add-town.php">Town Detail</a></li>
                             <li class="active">Add</li>
                         </ol>
                     </div>
@@ -68,22 +100,41 @@ if(isset($_POST["submit"])) {
                         <div class="card">
                             <div class="card-header"><strong>Town</strong><small> Details</small></div>
                             <form name="computer" method="post" action="">
-                                <p style="font-size:16px; color:red" align="center"> <?php if($msg){
-    echo $msg;
-  }  ?> </p>
+                                <p style="font-size:16px; color:red" align="center">
+                                <?php 
+                                /*
+                                 if($msg) {
+                                    echo $msg;
+                                  }  */
+                                ?> 
+                              </p>
                             <div class="card-body card-block">
  
                                 <div class="form-group">
                                     <label for="company" class=" form-control-label">Town Name</label>
-                                    <select name="town_id" class="form-control">
-                                       <?php
-                                       foreach ($town as $value)
-                                       {
-                                           ?><option ><?=$value['town_name'];?></option>
-                                       <?php
-                                       }
-                                       ?>
-                                            </div>
+                                    <input type="text" name="town_name" value="" class="form-control" id="town_name" required="true">
+                                </div>
+                                
+                                            <!--div class="row form-group">
+                                                <div class="col-12">
+
+                                                    </div>
+                                                    <div class="col-12">
+                                                    <div class="form-group">
+                                                        <label for="city" class=" form-control-label">Status</label>
+                                                        <input type="text" name="status" id="status" value="" class="form-control" required="true">
+                                                    </div>
+                                                    </div-->
+                                                    
+                                <?php
+                                /* $query=mysqli_query($con,"select * from  tblcomputers");
+              while($row=mysqli_fetch_array($query))
+              {
+              ?>    
+              <option value="<?php echo $row['ComputerName'];?>"><?php echo $row['ComputerName'];?></option>
+                  <?php } */
+                  ?>  
+                                                    </select></div>
                                                     </div>
                                                     </div>
                                                 
@@ -101,11 +152,24 @@ if(isset($_POST["submit"])) {
                                                 </form>
                                             </div>
 
+
+
+                                           
                                             </div>
                                         </div><!-- .animated -->
                                     </div><!-- .content -->
                                 </div><!-- /#right-panel -->
                                 <!-- Right Panel -->
-                                <?php include 'bottom-links.php'; ?>
+
+
+                            <script src="../vendors/jquery/dist/jquery.min.js"></script>
+                            <script src="../vendors/popper.js/dist/umd/popper.min.js"></script>
+
+                            <script src="../vendors/jquery-validation/dist/jquery.validate.min.js"></script>
+                            <script src="../vendors/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.min.js"></script>
+
+                            <script src="../vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+                            <script src="../assets/js/main.js"></script>
 </body>
 </html>
+<?php }  ?>
