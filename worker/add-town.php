@@ -101,12 +101,7 @@ if (strlen($_SESSION['id']==0)) {
                             <div class="card-header"><strong>Town</strong><small> Details</small></div>
                             <form name="computer" method="post" action="">
                                 <p style="font-size:16px; color:red" align="center">
-                                <?php 
-                                /*
-                                 if($msg) {
-                                    echo $msg;
-                                  }  */
-                                ?> 
+               
                               </p>
                             <div class="card-body card-block">
  
@@ -114,26 +109,7 @@ if (strlen($_SESSION['id']==0)) {
                                     <label for="company" class=" form-control-label">Town Name</label>
                                     <input type="text" name="town_name" value="" class="form-control" id="town_name" required="true">
                                 </div>
-                                
-                                            <!--div class="row form-group">
-                                                <div class="col-12">
-
-                                                    </div>
-                                                    <div class="col-12">
-                                                    <div class="form-group">
-                                                        <label for="city" class=" form-control-label">Status</label>
-                                                        <input type="text" name="status" id="status" value="" class="form-control" required="true">
-                                                    </div>
-                                                    </div-->
-                                                    
-                                <?php
-                                /* $query=mysqli_query($con,"select * from  tblcomputers");
-              while($row=mysqli_fetch_array($query))
-              {
-              ?>    
-              <option value="<?php echo $row['ComputerName'];?>"><?php echo $row['ComputerName'];?></option>
-                  <?php } */
-                  ?>  
+                               
                                                     </select></div>
                                                     </div>
                                                     </div>
@@ -152,24 +128,11 @@ if (strlen($_SESSION['id']==0)) {
                                                 </form>
                                             </div>
 
-
-
-                                           
                                             </div>
                                         </div><!-- .animated -->
                                     </div><!-- .content -->
                                 </div><!-- /#right-panel -->
-                                <!-- Right Panel -->
-
-
-                            <script src="../vendors/jquery/dist/jquery.min.js"></script>
-                            <script src="../vendors/popper.js/dist/umd/popper.min.js"></script>
-
-                            <script src="../vendors/jquery-validation/dist/jquery.validate.min.js"></script>
-                            <script src="../vendors/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.min.js"></script>
-
-                            <script src="../vendors/bootstrap/dist/js/bootstrap.min.js"></script>
-                            <script src="../assets/js/main.js"></script>
+<?php include 'bottom-links.php'; ?>
 </body>
 </html>
 <?php }  ?>

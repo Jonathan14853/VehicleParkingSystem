@@ -76,8 +76,6 @@ switch ($title) {
     <?php
     $cnt = 1;
     foreach ($data as $row) {
-        
-    } {
         ?>
         <tr>
             <td><?= $cnt; ?></td>

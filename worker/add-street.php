@@ -74,7 +74,9 @@ if(isset($_POST["submit"]))
                         <div class="card">
                             <div class="card-header"><strong>Street</strong><small> Details</small></div>
                             <form name="computer" method="post" action="">
-                                <p style="font-size:16px; color:red" align="center"> <?php if($msg){
+                                <p style="font-size:16px; color:red" align="center"> <?php
+                                $msg="";
+                                if($msg){
     echo $msg;
   }  ?> </p>
                             <div class="card-body card-block">

@@ -3,11 +3,10 @@ include 'customer-library.php';
 $payment= getPayment();
 if(isset($_POST["submit"]))
 {
-    $reference_code=$_SESSION['id'];
-    //$reference_code = $_POST['reference_code'];
+    $id=$_SESSION['id'];
     $amount= $_POST['amount'];
     $transaction_number = $_POST["transaction_number"];
-    $result = insertPayment($amount,$transaction_number,$reference_code);
+    $result = insertPayment($amount,$transaction_number,$id);
     
     if($result)
     {
@@ -75,7 +74,9 @@ if(isset($_POST["submit"]))
                         <div class="card">
                             <div class="card-header"><strong>Street</strong><small> Details</small></div>
                             <form name="computer" method="post" action="">
-                                <p style="font-size:16px; color:red" align="center"> <?php if($msg){
+                                <p style="font-size:16px; color:red" align="center"> <?php
+                                $msg = "";
+                                if($msg){
     echo $msg;
   }  ?> </p>
                             <div class="card-body card-block">
